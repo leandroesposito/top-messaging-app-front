@@ -1,0 +1,42 @@
+.flash-messages {
+  display: grid;
+  gap: 1rem;
+}
+
+.flash-message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--surface-1);
+  border-radius: 1rem;
+  transition: transform 0.5s;
+  transform: scaleY(1);
+  font-weight: 500;
+  transform-origin: top;
+}
+
+.collapsed {
+  transform: scaleY(0);
+}
+
+.flash-message:not(.error) {
+  border: 1px solid var(--primary-700);
+}
+
+.flash-message.error {
+  background-color: var(--error-background-color);
+  color: black;
+}
+
+.flash-message .close-flash-message {
+  border-radius: 50%;
+  padding: 0.2rem 0.4rem;
+  background-color: var(--surface-9);
+  color: white;
+  text-align: center;
+}
+
+.flash-message .close-flash-message:hover {
+  background-color: var(--surface-1);
+}

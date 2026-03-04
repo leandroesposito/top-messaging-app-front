@@ -1,0 +1,40 @@
+.form-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-row-content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-row .validation-result {
+  background-color: var(--error-background-color);
+  width: 100%;
+  text-align: center;
+  color: black;
+  font-weight: 500;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  transition: transform 0.5s;
+  transform-origin: top;
+  height: 1.5rem;
+  padding: 0 1rem;
+  min-width: 23rem;
+}
+
+.form-row .validation-result:empty {
+  transform: scaleY(0);
+}
+
+.form-row:not(:has(.validation-result:empty)) input {
+  border-color: var(--error-background-color);
+}
+
+.form-row:not(:has(.validation-result:empty)) input:focus-visible {
+  outline: 2px solid var(--error-background-color);
+}
