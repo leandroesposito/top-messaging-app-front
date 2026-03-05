@@ -1,12 +1,9 @@
 import "./App.css";
-import SignUp from "./components/SignUp/SignUp";
+import UnsignedUser from "./components/UnsignedUserScreen/UnsignedUserScreen";
+import { isLogedIn } from "./session/sessionManager";
 
 function App() {
-  return (
-    <>
-      <SignUp />
-    </>
-  );
+  return <>{!isLogedIn() ? <UnsignedUser /> : null}</>;
 }
 
 export default App;
