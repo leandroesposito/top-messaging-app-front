@@ -26,7 +26,7 @@ function logOut() {
 }
 
 function isLogedIn() {
-  return Boolean(localStorage.getItem("userId"));
+  return Boolean(getUserId());
 }
 
 function setAccessToken(token) {
