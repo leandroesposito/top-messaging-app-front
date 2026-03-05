@@ -1,5 +1,4 @@
 import "./FlashMessage.css";
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 
 export default function FlashMessage({ type, message }) {
@@ -34,8 +33,3 @@ export default function FlashMessage({ type, message }) {
     </div>
   );
 }
-
-FlashMessage.propTypes = {
-  type: PropTypes.oneOf(["error", "success"]),
-  message: PropTypes.string,
-};
