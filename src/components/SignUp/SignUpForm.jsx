@@ -1,15 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Required from "../Form/Required";
 import FormRow from "../Form/FormRow";
 import { setValidationResult } from "../Form/FormValidation";
 import useFetch from "../../hooks/useFetch";
 import FlashMessage from "../FlashMessage/FlashMessage";
 
-export default function SignUpForm() {
+export default function SignUpForm({ onSignUpSuccess }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, data, errors, makeRequest] = useFetch();
+
+  useEffect(() => {
+    let redirectTimeout = null;
+    if (data && data.success) {
+      redirectTimeout = setTimeout(() => {
+        onSignUpSuccess();
+      }, 3000);
+    }
+
+    return () => {
+      if (redirectTimeout) {
+        clearTimeout(redirectTimeout);
+      }
+    };
+  }, [data, onSignUpSuccess]);
 
   function onUsernameChange(event) {
     const usernameElem = event.target;
@@ -105,6 +120,10 @@ export default function SignUpForm() {
   function onSubmit(event) {
     event.preventDefault();
 
+    if (data && data.success) {
+      return;
+    }
+
     const validUsername = validateUsername();
     const validPassword = validatePassword();
     const validConfirmPassword = validateConfirmPassword();
@@ -121,6 +140,7 @@ export default function SignUpForm() {
   return (
     <div className="signup-form auth-form-container">
       <form onSubmit={onSubmit} className="auth-form">
+        <h2>Sign Up</h2>
         <FormRow>
           <label htmlFor="username">
             Username <Required />
