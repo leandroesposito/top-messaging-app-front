@@ -1,0 +1,18 @@
+.loading {
+  width: 1em;
+  height: 1em;
+  border: 0.2em dotted white;
+  border-radius: 50%;
+  animation: spin 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
