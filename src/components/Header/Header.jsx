@@ -1,7 +1,29 @@
-import { getUsername, isLogedIn } from "../../session/sessionManager";
+import { useEffect } from "react";
+import useFetch from "../../hooks/useFetch";
+import {
+  getRefreshToken,
+  getUsername,
+  isLogedIn,
+  logOut,
+} from "../../session/sessionManager";
 import "./Header.css";
 
 export default function Header({ onSignUpClick, onLogInClick }) {
+  const [loading, data, , makeRequest] = useFetch();
+
+  useEffect(() => {
+    if (data && data.success) {
+      logOut();
+      window.location.reload();
+    }
+  }, [data]);
+
+  function onLogOutClick() {
+    makeRequest("/auth/log-out", "POST", true, {
+      refreshToken: getRefreshToken(),
+    });
+  }
+
   return (
     <header className={`header ${isLogedIn() == true && "small"}`}>
       <div className="left">
@@ -14,7 +36,13 @@ export default function Header({ onSignUpClick, onLogInClick }) {
               <button className="username-button" disabled>
                 {getUsername()}
               </button>
-              <button className="log-out-button">Log out</button>
+              <button
+                className="log-out-button"
+                onClick={onLogOutClick}
+                disabled={loading}
+              >
+                Log out
+              </button>
             </>
           ) : (
             <>
