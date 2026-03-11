@@ -61,7 +61,53 @@ function getPublicName() {
   return localStorage.getItem("publicName") || null;
 }
 
+function updateLastRefreshTime() {
+  console.log("Token refreshed.");
+  localStorage.setItem("lastRefreshTime", new Date().toISOString());
+}
+
+function getLastRefreshAge() {
+  const lastRefresh = new Date(localStorage.getItem("lastRefreshTime"));
+  const now = new Date();
+  const elapsedTime = new Date(now.getTime() - lastRefresh.getTime());
+
+  return elapsedTime.getTime();
+}
+
+function updateLastRequestTime() {
+  localStorage.setItem("lastRequestTime", new Date().toISOString());
+}
+
+function getLastRequestAge() {
+  const lastRequest = new Date(localStorage.getItem("lastRequestTime"));
+  const now = new Date();
+  const elapsedTime = new Date(now.getTime() - lastRequest.getTime());
+
+  return elapsedTime.getTime();
+}
+
+function refreshCooldownPassed() {
+  return getLastRequestAge() > 10000;
+}
+
+function isNewToken() {
+  return getLastRefreshAge() < 15 * 60 * 10000;
+}
+
 function refreshTokens() {
+  if (!refreshCooldownPassed()) {
+    console.log("Waiting for token update.");
+    return new Promise((resolve) => {
+      const intervalId = setInterval(() => {
+        if (isNewToken()) {
+          console.log("Token updated.");
+          clearInterval(intervalId);
+          resolve(true);
+        }
+      }, 100);
+    });
+  }
+
   const options = {
     method: "POST",
     mode: "cors",
@@ -71,6 +117,7 @@ function refreshTokens() {
     }),
   };
 
+  updateLastRequestTime();
   return fetch("http://localhost:3000/api/auth/refresh", options)
     .then((response) => {
       return response.json();
@@ -78,6 +125,7 @@ function refreshTokens() {
     .then((data) => {
       setAccessToken(data.accessToken);
       setRefreshToken(data.refreshToken);
+      updateLastRefreshTime();
     })
     .catch((error) => {
       console.error("FETCH ERROR", error);
