@@ -65,12 +65,13 @@ function refreshTokens() {
   const options = {
     method: "POST",
     mode: "cors",
-    body: {
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
       refreshToken: getRefreshToken(),
-    },
+    }),
   };
 
-  return fetch("http://localhost:3000/auth/refresh", options)
+  return fetch("http://localhost:3000/api/auth/refresh", options)
     .then((response) => {
       return response.json();
     })
