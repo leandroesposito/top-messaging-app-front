@@ -27,7 +27,7 @@ function useFetch() {
     }
 
     if (authenticate) {
-      options.headers.Authorization = getAccessToken();
+      options.headers.Authorization = "Bearer " + getAccessToken();
     }
 
     try {
