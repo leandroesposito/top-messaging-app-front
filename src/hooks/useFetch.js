@@ -15,7 +15,6 @@ function useFetch() {
     body = null,
   ) {
     setLoading(true);
-    setData(null);
     const options = {
       method,
       mode: "cors",
