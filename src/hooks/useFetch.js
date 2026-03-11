@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { getAccessToken, refreshTokens } from "../session/sessionManager";
+import {
+  getAccessToken,
+  logOut,
+  refreshTokens,
+} from "../session/sessionManager";
 
 const domain = "http://localhost:3000/api";
 
@@ -48,6 +52,9 @@ function useFetch() {
         if (json.errors && json.errors[0].startsWith("Access token expired")) {
           await refreshTokens();
           return await makeRequest(route, method, authenticate, body);
+        } else {
+          logOut();
+          window.location.reload();
         }
       } else if (json.errors) {
         setErrors([...errors, json.errors]);
