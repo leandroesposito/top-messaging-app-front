@@ -100,7 +100,7 @@ export default function LogInForm() {
 
   return (
     <div className="login-form auth-form-container">
-      <form onSubmit={onSubmit} className="auth-form">
+      <form onSubmit={onSubmit} className="auth-form form">
         <h2>Log in</h2>
         <FormRow>
           <label htmlFor="username">Username</label>

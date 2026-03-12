@@ -10,21 +10,14 @@
   gap: 1rem;
 }
 
-.auth-form {
+.form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   background-color: var(--surface-1);
-  padding: 2rem;
   border-radius: 1rem;
-
-  h2 {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
 }
 
-.auth-form input {
+.form input {
   background-color: var(--surface-2);
   padding: 0.5rem;
   border: 1px solid;
@@ -33,11 +26,21 @@
   transition: border-color 0.5s;
 }
 
-.auth-form input:hover,
-.auth-form input:focus {
+.form input:hover,
+.form input:focus {
   border-color: var(--primary-200);
 }
 
-.auth-form input:focus-visible {
+.form input:focus-visible {
   outline: 2px solid var(--primary-200);
+}
+
+.auth-form {
+  gap: 1rem;
+  padding: 2rem;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
 }

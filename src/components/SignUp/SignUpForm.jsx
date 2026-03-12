@@ -139,7 +139,7 @@ export default function SignUpForm({ onSignUpSuccess }) {
 
   return (
     <div className="signup-form auth-form-container">
-      <form onSubmit={onSubmit} className="auth-form">
+      <form onSubmit={onSubmit} className="auth-form form">
         <h2>Sign Up</h2>
         <FormRow>
           <label htmlFor="username">
