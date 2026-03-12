@@ -9,6 +9,15 @@ export default function FlashMessage({ type, message }) {
     setTimeout(() => setCollapsed(false), 10);
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setRemoved(false);
+      setTimeout(() => {
+        setCollapsed(false);
+      }, 10);
+    }, 10);
+  }, [message]);
+
   function onCloseClick() {
     setCollapsed(true);
     setTimeout(() => {
