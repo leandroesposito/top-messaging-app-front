@@ -64,9 +64,7 @@ function useFetch() {
       return setLoading(false);
     } catch (error) {
       console.error("FETCH ERROR", error);
-      if (error.message.startsWith("NetworkError")) {
-        setErrors([error.message]);
-      }
+      setErrors([...errors, error.message]);
       return setLoading(false);
     }
   }
