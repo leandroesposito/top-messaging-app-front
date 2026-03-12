@@ -1,12 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
 import ChatItem from "./ChatItem";
 import FlashMessage from "../../FlashMessage/FlashMessage";
 import Loading from "../../Loading/Loading";
+import JoinGroup from "./JoinGroup/JoinGroup";
 
 export default function GroupChats() {
   const [loading, data, errors, makeRequest] = useFetch();
   const isFirstRender = useRef(true);
+  const [showJoinGroup, setShowJoinGroup] = useState(false);
 
   useEffect(() => {
     const getGroups = () => {
@@ -25,9 +27,21 @@ export default function GroupChats() {
     };
   }, [makeRequest]);
 
+  function onJoinGroupClick() {
+    setShowJoinGroup(!showJoinGroup);
+  }
+
   return (
     <div className="group-chats-list">
-      <h2>Groups</h2>
+      <div className="chats-list-header">
+        <h2>Groups</h2>
+        <div className="buttons">
+          <button onClick={onJoinGroupClick} className="flat">
+            {showJoinGroup && "Close "} Join group
+          </button>
+        </div>
+      </div>
+      <JoinGroup display={showJoinGroup} />
       {loading && data === null && <Loading size={4} />}
       {errors &&
         errors.length > 0 &&
