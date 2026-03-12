@@ -84,6 +84,9 @@ button:disabled {
   color: #bfbfbf;
   cursor: unset;
 }
+button.flat {
+  padding: 0.2em 1.2em;
+}
 
 main {
   flex: 1;
@@ -111,6 +114,11 @@ main {
   flex-direction: column;
   gap: 1rem;
   overflow-y: auto;
+}
+
+.chats-list-header {
+  display: flex;
+  justify-content: space-between;
 }
 
 button.chat-item {
@@ -170,4 +178,13 @@ button.chat-item:disabled {
 .last-message-time {
   font-weight: 400;
   font-size: 0.9rem;
+}
+
+.add-friend-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.add-friend-container p button {
+  margin: 0 1rem;
 }

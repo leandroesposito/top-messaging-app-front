@@ -44,3 +44,8 @@
     margin-bottom: 1rem;
   }
 }
+
+.chats-panel-form {
+  padding: 1rem;
+  background-color: var(--surface-5);
+}
