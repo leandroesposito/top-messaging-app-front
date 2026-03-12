@@ -13,7 +13,6 @@ export default function Header({ onSignUpClick, onLogInClick }) {
 
   useEffect(() => {
     if (data && data.success) {
-      logOut();
       window.location.reload();
     }
   }, [data]);
@@ -22,6 +21,7 @@ export default function Header({ onSignUpClick, onLogInClick }) {
     makeRequest("/auth/log-out", "POST", true, {
       refreshToken: getRefreshToken(),
     });
+    logOut();
   }
 
   return (
