@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   getAccessToken,
   logOut,
@@ -12,62 +12,68 @@ function useFetch() {
   const [data, setData] = useState(null);
   const [errors, setErrors] = useState([]);
 
-  async function makeRequest(
-    route,
-    method = "GET",
-    authenticate = false,
-    body = null,
-  ) {
-    setLoading(true);
-    const options = {
-      method,
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
-    };
+  const makeRequest = useCallback(
+    async function makeRequest(
+      route,
+      method = "GET",
+      authenticate = false,
+      body = null,
+    ) {
+      setLoading(true);
+      const options = {
+        method,
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+      };
 
-    if (body) {
-      options.body = JSON.stringify(body);
-    }
-
-    if (authenticate) {
-      options.headers.Authorization = "Bearer " + getAccessToken();
-    }
-
-    try {
-      const endpoint = domain + route;
-      const response = await fetch(endpoint, options);
-
-      if (response.status == 404) {
-        setLoading(false);
-        return ["Endpoint not found"];
+      if (body) {
+        options.body = JSON.stringify(body);
       }
 
-      if (response.status == 500) {
-        setLoading(false);
-        return ["Server error"];
+      if (authenticate) {
+        options.headers.Authorization = "Bearer " + getAccessToken();
       }
-      const json = await response.json();
 
-      if (response.status == 401) {
-        if (json.errors && json.errors[0].startsWith("Access token expired")) {
-          await refreshTokens();
-          return await makeRequest(route, method, authenticate, body);
-        } else {
-          logOut();
-          window.location.reload();
+      try {
+        const endpoint = domain + route;
+        const response = await fetch(endpoint, options);
+
+        if (response.status == 404) {
+          setLoading(false);
+          return ["Endpoint not found"];
         }
-      } else if (json.errors) {
-        setErrors([...errors, json.errors]);
-      } else {
-        setData(json);
+
+        if (response.status == 500) {
+          setLoading(false);
+          return ["Server error"];
+        }
+        const json = await response.json();
+
+        if (response.status == 401) {
+          if (
+            json.errors &&
+            json.errors[0].startsWith("Access token expired")
+          ) {
+            await refreshTokens();
+            return await makeRequest(route, method, authenticate, body);
+          } else {
+            logOut();
+            window.location.reload();
+          }
+        } else if (json.errors) {
+          setErrors([...errors, json.errors]);
+        } else {
+          setData(json);
+        }
+        return setLoading(false);
+      } catch (error) {
+        console.error("FETCH ERROR", error);
+        setErrors([...errors, error.message]);
+        return setLoading(false);
       }
-      return setLoading(false);
-    } catch (error) {
-      console.error("FETCH ERROR", error);
-      setErrors([...errors, error.message]);
-      return setLoading(false);
-    }
-  }
+    },
+    [errors],
+  );
 
   return [loading, data, errors, makeRequest];
 }
