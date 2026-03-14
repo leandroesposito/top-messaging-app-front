@@ -5,7 +5,9 @@ export default function ChatItem({
   lastMessageTime,
   unreadCount,
   onChatClick,
+  chatType,
   disabled,
+  isOpen = false,
 }) {
   const lastMessageTimeString = new Date(lastMessageTime)
     .toISOString()
@@ -13,8 +15,9 @@ export default function ChatItem({
 
   return (
     <button
-      className="chat-item"
+      className={`chat-item ${isOpen ? "is-open" : ""}`}
       data-id={id}
+      data-type={chatType}
       onClick={onChatClick}
       disabled={disabled}
     >

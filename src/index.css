@@ -71,7 +71,7 @@ button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
   background-color: var(--primary-200);
@@ -147,6 +147,12 @@ button.chat-item:disabled {
   border: 1px solid black;
   color: #bfbfbf;
   cursor: unset;
+}
+
+.chat-item.is-open {
+  border-color: var(--primary-100);
+  border-width: 2px;
+  background-color: var(--surface-9);
 }
 
 .chat-item .online-marker {

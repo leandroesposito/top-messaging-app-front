@@ -1,12 +1,11 @@
 import PrivateChats from "./PrivateChats";
 import GroupChats from "./GroupChats";
-import Loading from "../../Loading/Loading";
 
-export default function ChatsPanel() {
+export default function ChatsPanel({ onChatClick, currentChat }) {
   return (
     <div className="chats-panel">
-      <PrivateChats />
-      <GroupChats />
+      <PrivateChats onChatClick={onChatClick} currentChat={currentChat} />
+      <GroupChats onChatClick={onChatClick} currentChat={currentChat} />
     </div>
   );
 }

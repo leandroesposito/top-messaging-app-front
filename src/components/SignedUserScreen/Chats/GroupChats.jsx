@@ -5,7 +5,7 @@ import FlashMessage from "../../FlashMessage/FlashMessage";
 import Loading from "../../Loading/Loading";
 import JoinGroup from "./JoinGroup/JoinGroup";
 
-export default function GroupChats() {
+export default function GroupChats({ onChatClick, currentChat }) {
   const [loading, data, errors, makeRequest] = useFetch();
   const isFirstRender = useRef(true);
   const [showJoinGroup, setShowJoinGroup] = useState(false);
@@ -52,7 +52,14 @@ export default function GroupChats() {
         data.groups.length > 0 &&
         data.groups.map((g) => {
           return (
-            <ChatItem {...g} key={g.id} disabled={loading && data !== null} />
+            <ChatItem
+              {...g}
+              key={g.id}
+              isOpen={currentChat.type === "group" && currentChat.id === g.id}
+              disabled={loading && data !== null}
+              chatType={"group"}
+              onChatClick={onChatClick}
+            />
           );
         })}
     </div>

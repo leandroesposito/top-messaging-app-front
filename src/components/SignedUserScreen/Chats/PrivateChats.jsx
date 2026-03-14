@@ -5,7 +5,7 @@ import FlashMessage from "../../FlashMessage/FlashMessage";
 import Loading from "../../Loading/Loading";
 import AddFriend from "./AddFriend/AddFriend";
 
-export default function PrivateChats() {
+export default function PrivateChats({ onChatClick, currentChat }) {
   const [loading, data, errors, makeRequest] = useFetch();
   const isFirstRender = useRef(true);
   const [showAddFriend, setShowAddFriend] = useState(false);
@@ -52,7 +52,14 @@ export default function PrivateChats() {
         data.privateChats.length > 0 &&
         data.privateChats.map((pc) => {
           return (
-            <ChatItem {...pc} key={pc.id} disabled={loading && data !== null} />
+            <ChatItem
+              {...pc}
+              isOpen={currentChat.type === "friend" && currentChat.id === pc.id}
+              key={pc.id}
+              disabled={loading && data !== null}
+              chatType={"friend"}
+              onChatClick={onChatClick}
+            />
           );
         })}
     </div>

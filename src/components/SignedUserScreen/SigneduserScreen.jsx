@@ -1,11 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import Header from "../Header/Header";
 import ChatsPanel from "./Chats/ChatsPanel";
+import MainPanel from "./MainPanel/MainPanel";
 
 export default function SigneduserScreen() {
   const loaded = useRef(false);
   const [, , , makeRequest] = useFetch();
+  const [currentChat, setCurrentChat] = useState({ type: null, id: null });
 
   useEffect(() => {
     if (!loaded.current) {
@@ -17,12 +19,21 @@ export default function SigneduserScreen() {
     }
   }, [makeRequest]);
 
+  function onChatClick(event) {
+    const buttonData = event.target.closest(".chat-item").dataset;
+
+    setCurrentChat({
+      type: buttonData.type,
+      id: parseInt(buttonData.id),
+    });
+  }
+
   return (
     <>
       <Header />
       <main>
-        <ChatsPanel />
-        <div></div>
+        <ChatsPanel onChatClick={onChatClick} currentChat={currentChat} />
+        <MainPanel currentChat={currentChat} />
       </main>
     </>
   );
