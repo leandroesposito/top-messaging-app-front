@@ -1,0 +1,38 @@
+.chat-message {
+  background-color: var(--surface-9);
+  color: black;
+  border-radius: 1rem;
+  width: min(100%, 25rem);
+  padding: 0.5rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.chat-message.mine {
+  align-self: end;
+}
+
+.chat-message .message-user {
+  padding: 0;
+  background-color: unset;
+  color: var(--secondary-100);
+}
+
+.chat-message.mine .message-user {
+  color: var(--primary-100);
+}
+
+.chat-message .message-date {
+  align-self: end;
+  font-size: 0.9rem;
+  color: #bbbbbb;
+}
+
+.chat-message .message-content {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow-x: hidden;
+  max-width: 100%;
+}
