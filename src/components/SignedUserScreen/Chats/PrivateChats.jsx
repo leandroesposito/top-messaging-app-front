@@ -20,10 +20,10 @@ export default function PrivateChats() {
       isFirstRender.current = false;
     }
 
-    const timeoutId = setTimeout(getPrivateChats, 10000);
+    const intervalId = setInterval(getPrivateChats, 10000);
 
     return () => {
-      clearTimeout(timeoutId);
+      clearInterval(intervalId);
     };
   }, [makeRequest]);
 

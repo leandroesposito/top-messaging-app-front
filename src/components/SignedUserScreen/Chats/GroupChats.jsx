@@ -20,10 +20,10 @@ export default function GroupChats() {
       isFirstRender.current = false;
     }
 
-    const timeoutId = setTimeout(getGroups, 10000);
+    const intervalId = setInterval(getGroups, 10000);
 
     return () => {
-      clearTimeout(timeoutId);
+      clearInterval(intervalId);
     };
   }, [makeRequest]);
 
