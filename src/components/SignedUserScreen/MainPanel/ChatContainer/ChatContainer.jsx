@@ -1,0 +1,63 @@
+import { useEffect, useRef } from "react";
+import useFetch from "../../../../hooks/useFetch";
+import Loading from "../../../Loading/Loading";
+import ChatMessage from "./ChatMessage";
+import "./ChatContainer.css";
+
+export default function ChatContainer({ currentChat }) {
+  const [loading, data, errors, makeRequest] = useFetch();
+  const chatEnding = useRef(null); // used to scroll on opening and new messages
+
+  useEffect(() => {
+    const getMessages = () => {
+      if (currentChat.type === "group") {
+        makeRequest(`/groups/${currentChat.id}/messages`, "GET", true);
+      } else if (currentChat.type === "friend") {
+        makeRequest(`/messages/${currentChat.id}`, "GET", true);
+      }
+    };
+
+    getMessages();
+
+    const intervalId = setInterval(getMessages, 5000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [currentChat, makeRequest]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (chatEnding.current) {
+        chatEnding.current.scrollIntoView();
+      }
+    }, 50);
+  }, [currentChat]);
+
+  useEffect(() => {
+    const { scrollTop, scrollHeight, clientHeight } =
+      chatEnding.current.parentElement;
+    const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
+
+    if (distanceFromBottom < 500) {
+      chatEnding.current.scrollIntoView();
+    }
+  }, [data]);
+
+  return (
+    <div className="messages-container">
+      {loading && data === null && <Loading size={4} />}
+      {errors &&
+        errors.length > 0 &&
+        errors.map((e) => {
+          <FlashMessage type={"error"} message={e} />;
+        })}
+      {data !== null &&
+        data.messages.length > 0 &&
+        data.messages.map((m) => {
+          return <ChatMessage key={m.id} {...m} />;
+        })}
+      <div ref={chatEnding}></div>
+    </div>
+  );
+}
