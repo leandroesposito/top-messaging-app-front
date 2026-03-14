@@ -46,7 +46,7 @@ function getRefreshToken() {
 }
 
 function getUserId() {
-  return localStorage.getItem("id") || null;
+  return parseInt(localStorage.getItem("id")) || null;
 }
 
 function getUsername() {
