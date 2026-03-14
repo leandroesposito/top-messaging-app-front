@@ -1,0 +1,38 @@
+.new-message-form-container {
+  padding: 1rem;
+  background-color: var(--surface-1);
+}
+
+.mew-message-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+}
+
+.mew-message-form textarea,
+.mew-message-form .sizer {
+  grid-area: 1/ 1/ 2 /2;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: none;
+  resize: none;
+  align-self: stretch;
+  overflow-x: hidden;
+  max-height: 10rem;
+  min-height: 1rem;
+  background-color: var(--surface-9);
+}
+
+/* used to create the effect of auto grow of the textarea */
+.mew-message-form .sizer {
+  visibility: hidden;
+  height: auto;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  color: green;
+}
+
+.mew-message-form button {
+  grid-area: 1 /2;
+  align-self: end;
+}
