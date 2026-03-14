@@ -46,6 +46,7 @@ export default function AddFriendForm() {
     const formData = new FormData(event.target);
 
     makeRequest(`/users/friends/${formData.get("friend-code")}`, "POST", true);
+    setFriendCode("");
   }
 
   return (

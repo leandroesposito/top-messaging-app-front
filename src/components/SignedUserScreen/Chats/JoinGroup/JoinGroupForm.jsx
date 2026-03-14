@@ -46,6 +46,7 @@ export default function JoinGroupForm() {
     const formData = new FormData(event.target);
 
     makeRequest(`/groups/join/${formData.get("invite-code")}`, "POST", true);
+    setInviteCode("");
   }
 
   return (
