@@ -19,7 +19,7 @@ export default function ChatContainer({ currentChat }) {
 
     getMessages();
 
-    const intervalId = setInterval(getMessages, 5000);
+    const intervalId = setInterval(getMessages, 1000);
 
     return () => {
       clearInterval(intervalId);

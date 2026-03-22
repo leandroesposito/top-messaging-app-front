@@ -20,7 +20,7 @@ export default function PrivateChats({ onChatClick, currentChat }) {
       isFirstRender.current = false;
     }
 
-    const intervalId = setInterval(getPrivateChats, 10000);
+    const intervalId = setInterval(getPrivateChats, 1000);
 
     return () => {
       clearInterval(intervalId);

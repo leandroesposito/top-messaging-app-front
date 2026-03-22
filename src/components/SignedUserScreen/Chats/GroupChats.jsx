@@ -20,7 +20,7 @@ export default function GroupChats({ onChatClick, currentChat }) {
       isFirstRender.current = false;
     }
 
-    const intervalId = setInterval(getGroups, 10000);
+    const intervalId = setInterval(getGroups, 1000);
 
     return () => {
       clearInterval(intervalId);
