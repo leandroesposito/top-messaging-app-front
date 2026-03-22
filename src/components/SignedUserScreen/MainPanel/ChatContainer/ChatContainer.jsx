@@ -49,8 +49,8 @@ export default function ChatContainer({ currentChat }) {
       {loading && data === null && <Loading size={4} />}
       {errors &&
         errors.length > 0 &&
-        errors.map((e) => {
-          <FlashMessage type={"error"} message={e} />;
+        errors.map((e, index) => {
+          <FlashMessage type={"error"} message={e} key={index} />;
         })}
       {data !== null &&
         data.messages.length > 0 &&
