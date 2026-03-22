@@ -78,7 +78,7 @@ export default function NewMessageForm({ currentChat }) {
           onClick={onSubmitClick}
           disabled={loading}
         >
-          Submit
+          Send
         </button>
       </form>
     </div>
