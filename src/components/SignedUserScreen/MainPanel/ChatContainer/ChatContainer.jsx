@@ -3,6 +3,7 @@ import useFetch from "../../../../hooks/useFetch";
 import Loading from "../../../Loading/Loading";
 import ChatMessage from "./ChatMessage";
 import "./ChatContainer.css";
+import FlashMessage from "../../../FlashMessage/FlashMessage";
 
 export default function ChatContainer({ currentChat }) {
   const [loading, data, errors, makeRequest] = useFetch();
