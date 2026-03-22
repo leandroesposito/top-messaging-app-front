@@ -54,10 +54,12 @@ export default function PrivateChats({ onChatClick, currentChat }) {
           return (
             <ChatItem
               {...pc}
-              isOpen={currentChat.type === "friend" && currentChat.id === pc.id}
+              isOpen={
+                currentChat.type === "profile" && currentChat.id === pc.id
+              }
               key={pc.id}
               disabled={loading && data !== null}
-              chatType={"friend"}
+              chatType={"profile"}
               onChatClick={onChatClick}
             />
           );

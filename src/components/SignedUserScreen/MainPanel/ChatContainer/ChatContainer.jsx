@@ -12,7 +12,7 @@ export default function ChatContainer({ currentChat }) {
     const getMessages = () => {
       if (currentChat.type === "group") {
         makeRequest(`/groups/${currentChat.id}/messages`, "GET", true);
-      } else if (currentChat.type === "friend") {
+      } else if (currentChat.type === "profile") {
         makeRequest(`/messages/${currentChat.id}`, "GET", true);
       }
     };
