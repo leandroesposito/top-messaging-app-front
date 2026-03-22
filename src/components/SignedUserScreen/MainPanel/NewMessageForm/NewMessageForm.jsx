@@ -39,7 +39,7 @@ export default function NewMessageForm({ currentChat }) {
 
     if (currentChat.type === "group") {
       makeRequest(`/groups/${currentChat.id}/messages`, "POST", true, reqBody);
-    } else if (currentChat.type === "friend") {
+    } else if (currentChat.type === "profile") {
       makeRequest(`/messages/${currentChat.id}`, "POST", true, reqBody);
     }
     setBody("");
