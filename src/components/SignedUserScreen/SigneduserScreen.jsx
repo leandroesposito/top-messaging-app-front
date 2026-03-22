@@ -25,6 +25,7 @@ export default function SigneduserScreen() {
     setCurrentChat({
       type: buttonData.type,
       id: parseInt(buttonData.id),
+      name: buttonData.name,
     });
   }
 

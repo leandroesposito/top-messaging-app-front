@@ -18,6 +18,7 @@ export default function ChatItem({
       className={`chat-item ${isOpen ? "is-open" : ""}`}
       data-id={id}
       data-type={chatType}
+      data-name={name}
       onClick={onChatClick}
       disabled={disabled}
     >
