@@ -20,7 +20,7 @@ export default function SigneduserScreen() {
   }, [makeRequest]);
 
   function onChatClick(event) {
-    const buttonData = event.target.closest(".chat-item").dataset;
+    const buttonData = event.target.closest("button.chat-item, button").dataset;
 
     setCurrentChat({
       type: buttonData.type,
@@ -31,7 +31,7 @@ export default function SigneduserScreen() {
 
   return (
     <>
-      <Header />
+      <Header onChatClick={onChatClick} />
       <main>
         <ChatsPanel onChatClick={onChatClick} currentChat={currentChat} />
         <MainPanel currentChat={currentChat} />

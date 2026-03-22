@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import {
+  getPublicName,
   getRefreshToken,
+  getUserId,
   getUsername,
   isLogedIn,
   logOut,
 } from "../../session/sessionManager";
 import "./Header.css";
 
-export default function Header({ onSignUpClick, onLogInClick }) {
+export default function Header({ onSignUpClick, onLogInClick, onChatClick }) {
   const [loading, data, , makeRequest] = useFetch();
 
   useEffect(() => {
@@ -33,7 +35,13 @@ export default function Header({ onSignUpClick, onLogInClick }) {
         <div className="buttons">
           {isLogedIn() ? (
             <>
-              <button className="username-button" disabled>
+              <button
+                className="username-button"
+                data-type="profile"
+                data-id={getUserId()}
+                data-name={getPublicName()}
+                onClick={onChatClick}
+              >
                 {getUsername()}
               </button>
               <button
