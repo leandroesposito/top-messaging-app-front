@@ -1,0 +1,16 @@
+.group-data {
+  display: grid;
+  gap: 1rem;
+  background-color: var(--surface-6);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.group-data span {
+  font-weight: 500;
+}
+
+.invite-container {
+  display: flex;
+  gap: 1rem;
+}
