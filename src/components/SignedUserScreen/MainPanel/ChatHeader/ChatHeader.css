@@ -1,0 +1,9 @@
+.chat-header {
+  border-radius: 0;
+  background-color: var(--surface-4);
+  color: white;
+}
+
+.chat-header:hover {
+  background-color: var(--surface-9);
+}
