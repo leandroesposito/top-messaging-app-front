@@ -12,7 +12,13 @@ export default function ProfileDialog({ id }) {
   }, [makeRequest, id]);
 
   function onDeleteClick() {
-    makeRequest(`/users/friends/${id}`, "DELETE", true);
+    if (
+      confirm(
+        `Are you sure you want to delete ${data.publicName} from your friends list? this wont delete the messages.`,
+      )
+    ) {
+      makeRequest(`/users/friends/${id}`, "DELETE", true);
+    }
   }
 
   return (

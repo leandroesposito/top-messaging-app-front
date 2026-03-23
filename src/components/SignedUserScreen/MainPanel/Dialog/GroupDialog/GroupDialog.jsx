@@ -34,11 +34,21 @@ export default function GroupDialog({ id, onChatClick }) {
   }
 
   function onLeaveClick() {
-    makeRequest(`/groups/${id}/leave`, "DELETE", true);
+    if (
+      confirm(`Are you sure you want to leave the group ${data.group.name}?`)
+    ) {
+      makeRequest(`/groups/${id}/leave`, "DELETE", true);
+    }
   }
 
   function onDeleteGroupClick() {
-    makeRequest(`/groups/${id}/`, "DELETE", true);
+    if (
+      prompt(
+        `Are you sure you want to DELETE the group ${data.group.name}? write ${data.group.name} to accept.`,
+      ) === data.group.name
+    ) {
+      makeRequest(`/groups/${id}/`, "DELETE", true);
+    }
   }
 
   const isOwner =
