@@ -1,0 +1,30 @@
+.member-item {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.member-item .actions button {
+  transform: scale(0);
+  transition: transform 0.2s;
+}
+
+.member-item:hover .actions button {
+  transform: scale(1);
+}
+
+.member-item .actions button:focus-visible {
+  transform: scale(1);
+}
+
+.member-name {
+  flex: 1;
+}
+
+.member-name button {
+  width: 100%;
+  color: white;
+  background-color: var(--surface-6);
+  border: 1px solid var(--primary-700);
+}
