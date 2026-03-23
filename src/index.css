@@ -97,6 +97,9 @@ button:disabled {
 button.flat {
   padding: 0.2em 1.2em;
 }
+button.danger {
+  background-color: var(--error-background-color);
+}
 
 main {
   flex: 1;
