@@ -5,6 +5,7 @@ import Loading from "../../../../Loading/Loading";
 import MembersList from "./MembersList";
 import "./GroupDialog.css";
 import { getUserId } from "../../../../../session/sessionManager";
+import GroupForm from "./GroupForm";
 
 export default function GroupDialog({ id, onChatClick }) {
   const [loading, data, errors, makeRequest] = useFetch();
@@ -40,14 +41,30 @@ export default function GroupDialog({ id, onChatClick }) {
     makeRequest(`/groups/${id}/`, "DELETE", true);
   }
 
+  const isOwner =
+    data !== null &&
+    typeof data.group !== "undefined" &&
+    data.group.ownerId === getUserId();
+
   return (
     <div className="dialog-content">
       {loading && <Loading />}
       {data !== null && typeof data.group !== "undefined" && (
         <>
           <div className="group-data">
-            <h2>{data.group.name}</h2>
-            <p>{data.group.description}</p>
+            {isOwner ? (
+              <GroupForm
+                currentName={data.group.name}
+                currentDescription={data.group.description}
+                id={data.group.id}
+              />
+            ) : (
+              <>
+                <h2>{data.group.name}</h2>
+                <p>{data.group.description}</p>
+              </>
+            )}
+
             <div className="invite-container">
               <span>Invite code:</span> {data.group.inviteCode}{" "}
               <button className="flat" onClick={onCopyClick}>
@@ -56,7 +73,7 @@ export default function GroupDialog({ id, onChatClick }) {
             </div>
             {showCopied && <FlashMessage message={"Copied"} type={"success"} />}
             <div className="buttons">
-              {data.group.ownerId === getUserId() ? (
+              {isOwner ? (
                 <button className="danger" onClick={onDeleteGroupClick}>
                   Delete Group
                 </button>
