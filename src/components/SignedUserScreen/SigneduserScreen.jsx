@@ -34,7 +34,7 @@ export default function SigneduserScreen() {
       <Header onChatClick={onChatClick} />
       <main>
         <ChatsPanel onChatClick={onChatClick} currentChat={currentChat} />
-        <MainPanel currentChat={currentChat} />
+        <MainPanel currentChat={currentChat} onChatClick={onChatClick} />
       </main>
     </>
   );

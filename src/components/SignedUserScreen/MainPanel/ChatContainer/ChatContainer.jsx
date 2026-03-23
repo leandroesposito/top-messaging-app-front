@@ -5,7 +5,7 @@ import ChatMessage from "./ChatMessage";
 import "./ChatContainer.css";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
 
-export default function ChatContainer({ currentChat }) {
+export default function ChatContainer({ currentChat, onChatClick }) {
   const [loading, data, errors, makeRequest] = useFetch();
   const chatEnding = useRef(null); // used to scroll on opening and new messages
 
@@ -56,7 +56,7 @@ export default function ChatContainer({ currentChat }) {
       {data !== null &&
         data.messages.length > 0 &&
         data.messages.map((m) => {
-          return <ChatMessage key={m.id} {...m} />;
+          return <ChatMessage key={m.id} {...m} onChatClick={onChatClick} />;
         })}
       <div ref={chatEnding}></div>
     </div>
