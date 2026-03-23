@@ -18,6 +18,10 @@ export default function ChatContainer({ currentChat, onChatClick }) {
       }
     };
 
+    if (errors.length > 0) {
+      return;
+    }
+
     getMessages();
 
     const intervalId = setInterval(getMessages, 1000);
@@ -25,7 +29,7 @@ export default function ChatContainer({ currentChat, onChatClick }) {
     return () => {
       clearInterval(intervalId);
     };
-  }, [currentChat, makeRequest]);
+  }, [currentChat, makeRequest, errors]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -53,7 +57,8 @@ export default function ChatContainer({ currentChat, onChatClick }) {
         errors.map((e, index) => {
           <FlashMessage type={"error"} message={e} key={index} />;
         })}
-      {data !== null &&
+      {errors.length === 0 &&
+        data !== null &&
         data.messages.length > 0 &&
         data.messages.map((m) => {
           return <ChatMessage key={m.id} {...m} onChatClick={onChatClick} />;
