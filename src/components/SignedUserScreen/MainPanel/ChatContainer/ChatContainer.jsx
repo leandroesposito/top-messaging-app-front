@@ -10,7 +10,15 @@ export default function ChatContainer({ currentChat, onChatClick }) {
   const chatEnding = useRef(null); // used to scroll on opening and new messages
 
   useEffect(() => {
+    let intervalId = null;
+    const pollInterval = 2500;
+    const idleInterval = 5000;
+    const hiddenInterval = 30000;
+
     const getMessages = () => {
+      if (errors.length) {
+        return;
+      }
       if (currentChat.type === "group") {
         makeRequest(`/groups/${currentChat.id}/messages`, "GET", true);
       } else if (currentChat.type === "profile") {
@@ -18,16 +26,41 @@ export default function ChatContainer({ currentChat, onChatClick }) {
       }
     };
 
-    if (errors.length > 0) {
-      return;
-    }
+    const schedule = (ms) => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      intervalId = setInterval(getMessages, ms);
+    };
+
+    const updateInterval = () => {
+      if (document.hidden) {
+        schedule(hiddenInterval);
+      } else if (document.hasFocus && !document.hasFocus()) {
+        schedule(idleInterval);
+      } else {
+        schedule(pollInterval);
+      }
+    };
 
     getMessages();
+    updateInterval();
 
-    const intervalId = setInterval(getMessages, 1000);
+    const onVisibility = () => updateInterval();
+    const onFocus = () => updateInterval();
+    const onBlur = () => updateInterval();
+
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("focus", onFocus);
+    window.addEventListener("blur", onBlur);
 
     return () => {
-      clearInterval(intervalId);
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("focus", onFocus);
+      window.removeEventListener("blur", onBlur);
     };
   }, [currentChat, makeRequest, errors]);
 

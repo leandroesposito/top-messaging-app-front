@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
 import ChatItem from "./ChatItem";
 import FlashMessage from "../../FlashMessage/FlashMessage";
@@ -8,26 +8,59 @@ import GroupForm from "../MainPanel/Dialog/GroupDialog/GroupForm";
 
 export default function GroupChats({ onChatClick, currentChat }) {
   const [loading, data, errors, makeRequest] = useFetch();
-  const isFirstRender = useRef(true);
   const [showJoinGroup, setShowJoinGroup] = useState(false);
   const [showCreateGroup, setShowCreateGroup] = useState(false);
 
   useEffect(() => {
+    let intervalId = null;
+    const pollInterval = 2500;
+    const idleInterval = 5000;
+    const hiddenInterval = 30000;
+
     const getGroups = () => {
+      if (errors.length) {
+        return;
+      }
       makeRequest("/groups", "GET", true);
     };
 
-    if (isFirstRender.current) {
-      getGroups();
-      isFirstRender.current = false;
-    }
+    const schedule = (ms) => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      intervalId = setInterval(getGroups, ms);
+    };
 
-    const intervalId = setInterval(getGroups, 1000);
+    const updateInterval = () => {
+      if (document.hidden) {
+        schedule(hiddenInterval);
+      } else if (document.hasFocus && !document.hasFocus()) {
+        schedule(idleInterval);
+      } else {
+        schedule(pollInterval);
+      }
+    };
+
+    getGroups();
+    updateInterval();
+
+    const onVisibility = () => updateInterval();
+    const onFocus = () => updateInterval();
+    const onBlur = () => updateInterval();
+
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("focus", onFocus);
+    window.addEventListener("blur", onBlur);
 
     return () => {
-      clearInterval(intervalId);
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("focus", onFocus);
+      window.removeEventListener("blur", onBlur);
     };
-  }, [makeRequest]);
+  }, [makeRequest, errors]);
 
   function onJoinGroupClick() {
     setShowJoinGroup(!showJoinGroup);

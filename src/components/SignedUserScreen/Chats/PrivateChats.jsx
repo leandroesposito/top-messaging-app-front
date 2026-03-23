@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
 import ChatItem from "./ChatItem";
 import FlashMessage from "../../FlashMessage/FlashMessage";
@@ -7,25 +7,58 @@ import AddFriend from "./AddFriend/AddFriend";
 
 export default function PrivateChats({ onChatClick, currentChat }) {
   const [loading, data, errors, makeRequest] = useFetch();
-  const isFirstRender = useRef(true);
   const [showAddFriend, setShowAddFriend] = useState(false);
 
   useEffect(() => {
+    let intervalId = null;
+    const pollInterval = 2500;
+    const idleInterval = 5000;
+    const hiddenInterval = 30000;
+
     const getPrivateChats = () => {
+      if (errors.length) {
+        return;
+      }
       makeRequest("/messages", "GET", true);
     };
 
-    if (isFirstRender.current) {
-      getPrivateChats();
-      isFirstRender.current = false;
-    }
+    const schedule = (ms) => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      intervalId = setInterval(getPrivateChats, ms);
+    };
 
-    const intervalId = setInterval(getPrivateChats, 1000);
+    const updateInterval = () => {
+      if (document.hidden) {
+        schedule(hiddenInterval);
+      } else if (document.hasFocus && !document.hasFocus()) {
+        schedule(idleInterval);
+      } else {
+        schedule(pollInterval);
+      }
+    };
+
+    getPrivateChats();
+    updateInterval();
+
+    const onVisibility = () => updateInterval();
+    const onFocus = () => updateInterval();
+    const onBlur = () => updateInterval();
+
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("focus", onFocus);
+    window.addEventListener("blur", onBlur);
 
     return () => {
-      clearInterval(intervalId);
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("focus", onFocus);
+      window.removeEventListener("blur", onBlur);
     };
-  }, [makeRequest]);
+  }, [makeRequest, errors]);
 
   function onAddFriendClick() {
     setShowAddFriend(!showAddFriend);
