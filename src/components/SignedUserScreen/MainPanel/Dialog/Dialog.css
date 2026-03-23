@@ -1,0 +1,36 @@
+.dialog-box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  background-color: var(--surface-2);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  transition: transform 0.5s;
+  transform-origin: top;
+  min-width: 20rem;
+  overflow: auto;
+  max-height: 90%;
+  display: grid;
+  gap: 1rem;
+}
+
+.dialog-box .close-dialog-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 50%;
+  background-color: unset;
+
+  background-color: var(--primary-200);
+}
+
+.dialog-box .close-dialog-button:hover {
+  background-color: var(--primary-700);
+}
+
+.dialog-content {
+  display: grid;
+  gap: 1rem;
+}
