@@ -12,6 +12,12 @@ function useFetch() {
   const [data, setData] = useState(null);
   const [errors, setErrors] = useState([]);
 
+  const reset = useCallback(() => {
+    setLoading(false);
+    setData(null);
+    setErrors([]);
+  }, []);
+
   const makeRequest = useCallback(async function makeRequest(
     route,
     method = "GET",
@@ -69,7 +75,7 @@ function useFetch() {
     }
   }, []);
 
-  return [loading, data, errors, makeRequest];
+  return [loading, data, errors, makeRequest, reset];
 }
 
 export default useFetch;

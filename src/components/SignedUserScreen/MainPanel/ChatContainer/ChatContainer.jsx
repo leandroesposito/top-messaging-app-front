@@ -6,7 +6,7 @@ import "./ChatContainer.css";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
 
 export default function ChatContainer({ currentChat, onChatClick }) {
-  const [loading, data, errors, makeRequest] = useFetch();
+  const [loading, data, errors, makeRequest, reset] = useFetch();
   const chatEnding = useRef(null); // used to scroll on opening and new messages
 
   useEffect(() => {
@@ -37,7 +37,8 @@ export default function ChatContainer({ currentChat, onChatClick }) {
         chatEnding.current.scrollIntoView();
       }
     }, 50);
-  }, [currentChat]);
+    reset();
+  }, [currentChat, reset]);
 
   useEffect(() => {
     const { scrollTop, scrollHeight, clientHeight } =
