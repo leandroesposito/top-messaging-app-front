@@ -99,7 +99,6 @@ export default function GroupChats({ onChatClick, currentChat }) {
               {...g}
               key={g.id}
               isOpen={currentChat.type === "group" && currentChat.id === g.id}
-              disabled={loading && data !== null}
               chatType={"group"}
               onChatClick={onChatClick}
             />

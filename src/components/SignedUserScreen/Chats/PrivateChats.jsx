@@ -91,7 +91,6 @@ export default function PrivateChats({ onChatClick, currentChat }) {
                 currentChat.type === "profile" && currentChat.id === pc.id
               }
               key={pc.id}
-              disabled={loading && data !== null}
               chatType={"profile"}
               onChatClick={onChatClick}
             />

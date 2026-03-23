@@ -6,7 +6,7 @@ export default function ChatItem({
   unreadCount,
   onChatClick,
   chatType,
-  disabled,
+  disabled = false,
   isOpen = false,
 }) {
   const lastMessageTimeString = new Date(lastMessageTime)
