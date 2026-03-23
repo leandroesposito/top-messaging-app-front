@@ -83,6 +83,7 @@ export default function GroupDialog({ id, onChatClick }) {
                 </button>
               )}
             </div>
+            {loading && <Loading size={2} />}
           </div>
           <MembersList
             id={data.group.id}

@@ -29,6 +29,7 @@ export default function ProfileDialog({ id }) {
               </button>
             )}
           </div>
+          {loading && <Loading size={2} />}
         </>
       )}
       {data !== null && typeof data.message !== "undefined" && (

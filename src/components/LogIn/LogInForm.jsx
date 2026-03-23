@@ -4,6 +4,7 @@ import useFetch from "../../hooks/useFetch";
 import FlashMessage from "../FlashMessage/FlashMessage";
 import { setValidationResult } from "../Form/FormValidation";
 import { logIn } from "../../session/sessionManager";
+import Loading from "../Loading/Loading";
 
 export default function LogInForm() {
   const [username, setUsername] = useState("");
@@ -133,6 +134,7 @@ export default function LogInForm() {
             Submit
           </button>
         </div>
+        {loading && <Loading size={4} />}
       </form>
       <div className="flash-messages">
         {errors.map((error, index) => (

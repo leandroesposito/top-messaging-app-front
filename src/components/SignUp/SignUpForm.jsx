@@ -4,6 +4,7 @@ import FormRow from "../Form/FormRow";
 import { setValidationResult } from "../Form/FormValidation";
 import useFetch from "../../hooks/useFetch";
 import FlashMessage from "../FlashMessage/FlashMessage";
+import Loading from "../Loading/Loading";
 
 export default function SignUpForm({ onSignUpSuccess }) {
   const [username, setUsername] = useState("");
@@ -192,6 +193,7 @@ export default function SignUpForm({ onSignUpSuccess }) {
             Submit
           </button>
         </div>
+        {loading && <Loading size={4} />}
       </form>
       <div className="flash-messages">
         {errors.map((error, index) => (

@@ -3,6 +3,7 @@ import useFetch from "../../../../hooks/useFetch";
 import { setValidationResult } from "../../../Form/FormValidation";
 import FormRow from "../../../Form/FormRow";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
+import Loading from "../../../Loading/Loading";
 
 export default function JoinGroupForm() {
   const [inviteCode, setInviteCode] = useState("");
@@ -75,6 +76,7 @@ export default function JoinGroupForm() {
             Submit
           </button>
         </div>
+        {loading && <Loading size={3} />}
       </form>
       <div className="flash-messages">
         {errors.map((error, index) => (

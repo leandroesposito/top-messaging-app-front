@@ -4,6 +4,7 @@ import { getPublicName, getUserId } from "../../../../session/sessionManager";
 import { setValidationResult } from "../../../Form/FormValidation";
 import FormRow from "../../../Form/FormRow";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
+import Loading from "../../../Loading/Loading";
 
 export default function ProfileForm() {
   const [loading, data, errors, makeRequest] = useFetch();
@@ -138,6 +139,7 @@ export default function ProfileForm() {
             Submit
           </button>
         </div>
+        {loading && <Loading size={2} />}
       </form>
       <div className="flash-messages">
         {errors.map((error, index) => (

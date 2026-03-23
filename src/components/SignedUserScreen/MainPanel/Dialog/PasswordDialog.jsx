@@ -4,6 +4,7 @@ import { setValidationResult } from "../../../Form/FormValidation";
 import FormRow from "../../../Form/FormRow";
 import Required from "../../../Form/Required";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
+import Loading from "../../../Loading/Loading";
 
 export default function PasswordForm() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -160,6 +161,7 @@ export default function PasswordForm() {
             Submit
           </button>
         </div>
+        {loading && <Loading size={2} />}
       </form>
       <div className="flash-messages">
         {errors.map((error, index) => (

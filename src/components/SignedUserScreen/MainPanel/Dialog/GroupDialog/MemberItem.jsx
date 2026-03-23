@@ -1,6 +1,7 @@
 import useFetch from "../../../../../hooks/useFetch";
 import { getUserId } from "../../../../../session/sessionManager";
 import FlashMessage from "../../../../FlashMessage/FlashMessage";
+import Loading from "../../../../Loading/Loading";
 import "./MemberItem.css";
 
 export default function MemberItem({
@@ -10,7 +11,7 @@ export default function MemberItem({
   isOwner,
   onChatClick,
 }) {
-  const [, data, errors, makeRequest] = useFetch();
+  const [loading, data, errors, makeRequest] = useFetch();
 
   function onBanClick() {
     if (confirm(`Are you sure you want to ban ${publicName}?`)) {
@@ -32,13 +33,14 @@ export default function MemberItem({
               {publicName}
             </button>
           </div>
-          {isOwner && id !== getUserId() && (
+          {!loading && isOwner && id !== getUserId() && (
             <div className="actions">
               <button className="danger" onClick={onBanClick}>
                 Ban
               </button>
             </div>
           )}
+          {loading && <Loading size={2} />}
         </>
       ) : (
         <>
