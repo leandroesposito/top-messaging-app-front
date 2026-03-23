@@ -4,11 +4,13 @@ import ChatItem from "./ChatItem";
 import FlashMessage from "../../FlashMessage/FlashMessage";
 import Loading from "../../Loading/Loading";
 import JoinGroupForm from "./JoinGroup/JoinGroupForm";
+import GroupForm from "../MainPanel/Dialog/GroupDialog/GroupForm";
 
 export default function GroupChats({ onChatClick, currentChat }) {
   const [loading, data, errors, makeRequest] = useFetch();
   const isFirstRender = useRef(true);
   const [showJoinGroup, setShowJoinGroup] = useState(false);
+  const [showCreateGroup, setShowCreateGroup] = useState(false);
 
   useEffect(() => {
     const getGroups = () => {
@@ -31,17 +33,25 @@ export default function GroupChats({ onChatClick, currentChat }) {
     setShowJoinGroup(!showJoinGroup);
   }
 
+  function onCreateGroupClick() {
+    setShowCreateGroup(!showCreateGroup);
+  }
+
   return (
     <div className="group-chats-list">
       <div className="chats-list-header">
         <h2>Groups</h2>
         <div className="buttons">
+          <button onClick={onCreateGroupClick} className="flat">
+            {showCreateGroup && "Close "} Create group
+          </button>
           <button onClick={onJoinGroupClick} className="flat">
             {showJoinGroup && "Close "} Join group
           </button>
         </div>
       </div>
       {showJoinGroup && <JoinGroupForm />}
+      {showCreateGroup && <GroupForm />}
       {loading && data === null && <Loading size={4} />}
       {errors &&
         errors.length > 0 &&
