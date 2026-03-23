@@ -3,7 +3,7 @@ import useFetch from "../../../hooks/useFetch";
 import ChatItem from "./ChatItem";
 import FlashMessage from "../../FlashMessage/FlashMessage";
 import Loading from "../../Loading/Loading";
-import JoinGroup from "./JoinGroup/JoinGroup";
+import JoinGroupForm from "./JoinGroup/JoinGroupForm";
 
 export default function GroupChats({ onChatClick, currentChat }) {
   const [loading, data, errors, makeRequest] = useFetch();
@@ -41,7 +41,7 @@ export default function GroupChats({ onChatClick, currentChat }) {
           </button>
         </div>
       </div>
-      <JoinGroup display={showJoinGroup} />
+      {showJoinGroup && <JoinGroupForm />}
       {loading && data === null && <Loading size={4} />}
       {errors &&
         errors.length > 0 &&
