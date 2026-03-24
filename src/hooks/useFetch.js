@@ -5,7 +5,7 @@ import {
   refreshTokens,
 } from "../session/sessionManager";
 
-const domain = "http://localhost:3000/api";
+const domain = "https://top-messaging-app-server.onrender.com/api";
 
 function useFetch() {
   const [loading, setLoading] = useState(false);

@@ -118,7 +118,10 @@ function refreshTokens() {
   };
 
   updateLastRequestTime();
-  return fetch("http://localhost:3000/api/auth/refresh", options)
+  return fetch(
+    "https://top-messaging-app-server.onrender.com/api/auth/refresh",
+    options,
+  )
     .then((response) => {
       return response.json();
     })
