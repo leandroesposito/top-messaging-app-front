@@ -65,15 +65,11 @@ export default function ProfileForm() {
   function validateDescription() {
     const descriptionElem = document.querySelector("input#description");
 
-    if (descriptionElem.validity.valueMissing) {
-      setValidationResult(descriptionElem, "Description is required.");
-    } else if (descriptionElem.validity.tooLong) {
+    if (descriptionElem.validity.tooLong) {
       setValidationResult(
         descriptionElem,
         "Description can't be longer than 500 characters.",
       );
-    } else if (descriptionElem.value.trim() === "") {
-      setValidationResult(descriptionElem, "Description is required.");
     } else {
       setValidationResult(descriptionElem, "");
       return true;
@@ -131,7 +127,6 @@ export default function ProfileForm() {
             onChange={onDescriptionChange}
             onBlur={validateDescription}
             maxLength={500}
-            required
           />
         </FormRow>
         <div className="buttons">
