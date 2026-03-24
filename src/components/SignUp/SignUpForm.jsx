@@ -5,12 +5,14 @@ import { setValidationResult } from "../Form/FormValidation";
 import useFetch from "../../hooks/useFetch";
 import FlashMessage from "../FlashMessage/FlashMessage";
 import Loading from "../Loading/Loading";
+import "./SignUpForm.css";
 
 export default function SignUpForm({ onSignUpSuccess }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, data, errors, makeRequest] = useFetch();
+  const [viewPassword, setViewPassword] = useState(false);
 
   useEffect(() => {
     let redirectTimeout = null;
@@ -138,6 +140,10 @@ export default function SignUpForm({ onSignUpSuccess }) {
     makeRequest("/auth/sign-up", "POST", false, Object.fromEntries(formData));
   }
 
+  function onPasswordVisibilityClick() {
+    setViewPassword(!viewPassword);
+  }
+
   return (
     <div className="signup-form auth-form-container">
       <form onSubmit={onSubmit} className="auth-form form">
@@ -164,7 +170,7 @@ export default function SignUpForm({ onSignUpSuccess }) {
             Password <Required />
           </label>
           <input
-            type="password"
+            type={viewPassword ? "text" : "password"}
             name="password"
             id="password"
             value={password}
@@ -173,6 +179,13 @@ export default function SignUpForm({ onSignUpSuccess }) {
             minLength={8}
             required
           />
+          <button
+            className="view-password"
+            type="button"
+            onClick={onPasswordVisibilityClick}
+          >
+            {viewPassword ? "Hide" : "View"}
+          </button>
         </FormRow>
         <FormRow>
           <label htmlFor="confirm-password">

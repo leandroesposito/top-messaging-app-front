@@ -1,0 +1,15 @@
+.form-row {
+  position: relative;
+}
+
+button.view-password {
+  position: absolute;
+  right: 0;
+  background-color: unset;
+  color: white;
+  padding: 0.6rem;
+}
+
+input#password {
+  padding-right: 3.5rem;
+}
