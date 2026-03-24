@@ -53,10 +53,11 @@ export default function GroupDialog({ id, onChatClick, onCloseDialog }) {
   }
 
   function onDeleteGroupClick() {
+    const confirmWord = "DELETE";
     if (
       prompt(
-        `Are you sure you want to DELETE the group ${data.group.name}? write ${data.group.name} to accept.`,
-      ) === data.group.name
+        `Are you sure you want to DELETE the group ${data.group.name}? write "${confirmWord}" to accept.`,
+      ) === confirmWord
     ) {
       makeRequest(`/groups/${id}/`, "DELETE", true);
     }
