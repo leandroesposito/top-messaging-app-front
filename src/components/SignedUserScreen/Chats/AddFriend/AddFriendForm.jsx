@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import { setValidationResult } from "../../../Form/FormValidation";
 import FormRow from "../../../Form/FormRow";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
 import Loading from "../../../Loading/Loading";
 
-export default function AddFriendForm() {
+export default function AddFriendForm({ onCloseAddFriend }) {
   const [friendCode, setFriendCode] = useState("");
   const [loading, data, errors, makeRequest] = useFetch();
 
@@ -49,6 +49,12 @@ export default function AddFriendForm() {
     makeRequest(`/users/friends/${formData.get("friend-code")}`, "POST", true);
     setFriendCode("");
   }
+
+  useEffect(() => {
+    if (data !== null && typeof data.message !== "undefined") {
+      setTimeout(onCloseAddFriend, 2000);
+    }
+  }, [data, onCloseAddFriend]);
 
   return (
     <div className="add-fiend-form">

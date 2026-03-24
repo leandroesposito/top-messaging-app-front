@@ -3,7 +3,7 @@ import { getFriendCode } from "../../../../session/sessionManager";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
 import AddFriendForm from "./AddFriendForm";
 
-export default function AddFriend({ display }) {
+export default function AddFriend({ display, onCloseAddFriend }) {
   const [showCopied, setShowCopied] = useState(false);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function AddFriend({ display }) {
         </button>
       </p>
       {showCopied && <FlashMessage message={"Copied"} type={"success"} />}
-      <AddFriendForm />
+      <AddFriendForm onCloseAddFriend={onCloseAddFriend} />
     </div>
   );
 }

@@ -64,6 +64,10 @@ export default function PrivateChats({ onChatClick, currentChat }) {
     setShowAddFriend(!showAddFriend);
   }
 
+  function onCloseAddFriend() {
+    setShowAddFriend(false);
+  }
+
   return (
     <div className="private-chats-list">
       <div className="chats-list-header">
@@ -74,7 +78,7 @@ export default function PrivateChats({ onChatClick, currentChat }) {
           </button>
         </div>
       </div>
-      <AddFriend display={showAddFriend} />
+      <AddFriend display={showAddFriend} onCloseAddFriend={onCloseAddFriend} />
       {loading && data === null && <Loading size={4} />}
       {errors &&
         errors.length > 0 &&
