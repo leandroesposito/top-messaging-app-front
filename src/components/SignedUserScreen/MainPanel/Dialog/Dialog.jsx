@@ -25,10 +25,14 @@ export default function Dialog({
         <MyProfileDialog />
       )}
       {currentChat.type === "profile" && currentChat.id !== getUserId() && (
-        <ProfileDialog id={currentChat.id} />
+        <ProfileDialog id={currentChat.id} onCloseDialog={onCloseDialogClick} />
       )}
       {currentChat.type === "group" && (
-        <GroupDialog id={currentChat.id} onChatClick={onChatClick} />
+        <GroupDialog
+          id={currentChat.id}
+          onChatClick={onChatClick}
+          onCloseDialog={onCloseDialogClick}
+        />
       )}
     </div>
   );

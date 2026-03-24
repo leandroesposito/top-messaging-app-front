@@ -4,7 +4,7 @@ import Loading from "../../../Loading/Loading";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
 import { getUserId } from "../../../../session/sessionManager";
 
-export default function ProfileDialog({ id }) {
+export default function ProfileDialog({ id, onCloseDialog }) {
   const [loading, data, errors, makeRequest] = useFetch();
 
   useEffect(() => {
@@ -20,6 +20,17 @@ export default function ProfileDialog({ id }) {
       makeRequest(`/users/friends/${id}`, "DELETE", true);
     }
   }
+
+  useEffect(() => {
+    if (
+      (data === null && errors.length > 0) ||
+      (data !== null &&
+        typeof data.group === "undefined" &&
+        typeof data.message !== "undefined")
+    ) {
+      setTimeout(onCloseDialog, 2000);
+    }
+  }, [data, errors, onCloseDialog]);
 
   return (
     <div className="dialog-content">

@@ -7,7 +7,7 @@ import "./GroupDialog.css";
 import { getUserId } from "../../../../../session/sessionManager";
 import GroupForm from "./GroupForm";
 
-export default function GroupDialog({ id, onChatClick }) {
+export default function GroupDialog({ id, onChatClick, onCloseDialog }) {
   const [loading, data, errors, makeRequest] = useFetch();
   const [showCopied, setShowCopied] = useState(false);
 
@@ -27,6 +27,17 @@ export default function GroupDialog({ id, onChatClick }) {
       clearTimeout(timeoutId);
     };
   }, [showCopied]);
+
+  useEffect(() => {
+    if (
+      (data === null && errors.length > 0) ||
+      (data !== null &&
+        typeof data.group === "undefined" &&
+        typeof data.message !== "undefined")
+    ) {
+      setTimeout(onCloseDialog, 2000);
+    }
+  }, [data, errors, onCloseDialog]);
 
   function onCopyClick() {
     navigator.clipboard.writeText(data.group.inviteCode);
