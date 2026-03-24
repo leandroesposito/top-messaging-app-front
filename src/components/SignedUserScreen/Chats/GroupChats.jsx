@@ -70,6 +70,14 @@ export default function GroupChats({ onChatClick, currentChat }) {
     setShowCreateGroup(!showCreateGroup);
   }
 
+  function onCloseCreateGroup() {
+    setShowCreateGroup(false);
+  }
+
+  function onCloseJoinGroup() {
+    setShowJoinGroup(false);
+  }
+
   return (
     <div className="group-chats-list">
       <div className="chats-list-header">
@@ -83,8 +91,8 @@ export default function GroupChats({ onChatClick, currentChat }) {
           </button>
         </div>
       </div>
-      {showJoinGroup && <JoinGroupForm />}
-      {showCreateGroup && <GroupForm />}
+      {showJoinGroup && <JoinGroupForm onCloseJoinGroup={onCloseJoinGroup} />}
+      {showCreateGroup && <GroupForm onCloseCreateGroup={onCloseCreateGroup} />}
       {loading && data === null && <Loading size={4} />}
       {errors &&
         errors.length > 0 &&

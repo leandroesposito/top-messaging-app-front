@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../../../../../hooks/useFetch";
 import { setValidationResult } from "../../../../Form/FormValidation";
 import FormRow from "../../../../Form/FormRow";
@@ -6,6 +6,7 @@ import FlashMessage from "../../../../FlashMessage/FlashMessage";
 import Loading from "../../../../Loading/Loading";
 
 export default function GroupForm({
+  onCloseCreateGroup,
   currentName = null,
   currentDescription = null,
   id = null,
@@ -66,6 +67,12 @@ export default function GroupForm({
       Object.fromEntries(formData),
     );
   }
+
+  useEffect(() => {
+    if (data !== null && typeof data.message !== "undefined") {
+      setTimeout(onCloseCreateGroup, 2000);
+    }
+  }, [data, onCloseCreateGroup]);
 
   const isCreate =
     currentName === null && currentDescription === null && id === null;

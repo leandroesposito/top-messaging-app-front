@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import { setValidationResult } from "../../../Form/FormValidation";
 import FormRow from "../../../Form/FormRow";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
 import Loading from "../../../Loading/Loading";
 
-export default function JoinGroupForm() {
+export default function JoinGroupForm({ onCloseJoinGroup }) {
   const [inviteCode, setInviteCode] = useState("");
   const [loading, data, errors, makeRequest] = useFetch();
 
@@ -49,6 +49,12 @@ export default function JoinGroupForm() {
     makeRequest(`/groups/join/${formData.get("invite-code")}`, "POST", true);
     setInviteCode("");
   }
+
+  useEffect(() => {
+    if (data !== null && typeof data.message !== "undefined") {
+      setTimeout(onCloseJoinGroup, 2000);
+    }
+  }, [data, onCloseJoinGroup]);
 
   return (
     <div className="join-group-form">
