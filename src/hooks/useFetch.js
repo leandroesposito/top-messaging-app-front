@@ -62,10 +62,14 @@ function useFetch() {
           logOut();
           window.location.reload();
         }
-      } else if (json.errors) {
-        setErrors((errors) => [...errors, ...json.errors]);
       } else {
-        setData(json);
+        const { errors: _, ...newData } = json;
+        if (json.errors) {
+          setErrors((errors) => [...errors, ...json.errors]);
+        }
+        if (Object.keys(newData).length > 0) {
+          setData(newData);
+        }
       }
       return setLoading(false);
     } catch (error) {
