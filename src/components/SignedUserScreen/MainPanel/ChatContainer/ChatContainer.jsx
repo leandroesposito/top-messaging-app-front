@@ -86,16 +86,18 @@ export default function ChatContainer({ currentChat, onChatClick }) {
   return (
     <div className="messages-container">
       {loading && data === null && <Loading size={4} />}
-      {errors &&
-        errors.length > 0 &&
-        errors.map((e, index) => {
-          <FlashMessage type={"error"} message={e} key={index} />;
-        })}
-      {errors.length === 0 &&
-        data !== null &&
+      {data !== null &&
         data.messages.length > 0 &&
         data.messages.map((m) => {
           return <ChatMessage key={m.id} {...m} onChatClick={onChatClick} />;
+        })}
+      {data !== null && typeof data.message !== "undefined" && (
+        <FlashMessage type={"success"} message={data.message} />
+      )}
+      {errors &&
+        errors.length > 0 &&
+        errors.map((e, index) => {
+          return <FlashMessage type={"error"} message={e} key={index} />;
         })}
       <div ref={chatEnding}></div>
     </div>

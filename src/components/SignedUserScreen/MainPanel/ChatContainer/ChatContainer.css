@@ -7,3 +7,7 @@
   gap: 1rem;
   align-items: start;
 }
+
+.messages-container .flash-message {
+  align-self: center;
+}
