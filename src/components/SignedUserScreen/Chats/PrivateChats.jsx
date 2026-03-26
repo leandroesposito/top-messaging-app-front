@@ -83,7 +83,7 @@ export default function PrivateChats({ onChatClick, currentChat }) {
       {errors &&
         errors.length > 0 &&
         errors.map((e, index) => {
-          <FlashMessage type={"error"} message={e} key={index} />;
+          return <FlashMessage type={"error"} message={e} key={index} />;
         })}
       {data !== null &&
         data.privateChats.length > 0 &&

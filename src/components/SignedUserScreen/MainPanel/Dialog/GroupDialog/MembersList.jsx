@@ -22,7 +22,7 @@ export default function MembersList({ id, ownerId, onChatClick }) {
       {errors &&
         errors.length > 0 &&
         errors.map((e, index) => {
-          <FlashMessage type={"error"} message={e} key={index} />;
+          return <FlashMessage type={"error"} message={e} key={index} />;
         })}
       {data !== null &&
         Array.isArray(data.members) &&
