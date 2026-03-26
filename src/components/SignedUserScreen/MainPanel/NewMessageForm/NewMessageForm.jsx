@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
 import "./NewMessageForm.css";
 
 export default function NewMessageForm({ currentChat }) {
   const [body, setBody] = useState("");
-  const [loading, , errors, makeRequest] = useFetch();
+  const [loading, data, errors, makeRequest, reset] = useFetch();
+  const [canSendMessage, setCanSendMessage] = useState(true);
 
   function onBodyChange(event) {
     const bodyElem = event.target;
@@ -51,6 +52,21 @@ export default function NewMessageForm({ currentChat }) {
     }
   }
 
+  useEffect(() => {
+    if (data && data.permission === false) {
+      setTimeout(() => {
+        setCanSendMessage(false);
+      });
+    }
+  }, [data]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCanSendMessage(true);
+    });
+    reset();
+  }, [currentChat, reset]);
+
   return (
     <div className="new-message-form-container">
       <div className="flash-messages">
@@ -70,13 +86,14 @@ export default function NewMessageForm({ currentChat }) {
           rows={1}
           required
           value={body}
+          disabled={!canSendMessage}
         ></textarea>
         <pre className="sizer">{body}</pre>
         <button
           type="submit"
           className="flat"
           onClick={onSubmitClick}
-          disabled={loading}
+          disabled={loading || !canSendMessage}
         >
           Send
         </button>
