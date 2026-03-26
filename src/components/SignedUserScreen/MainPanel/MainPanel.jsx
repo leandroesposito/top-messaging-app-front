@@ -26,6 +26,8 @@ export default function MainPanel({ currentChat, onChatClick }) {
             currentChat={currentChat}
             onChatHeaderClick={onChatHeaderClick}
           />
+          <ChatContainer currentChat={currentChat} onChatClick={onChatClick} />
+          <NewMessageForm currentChat={currentChat} />
           {displayDialog === true && (
             <Dialog
               currentChat={currentChat}
@@ -33,8 +35,6 @@ export default function MainPanel({ currentChat, onChatClick }) {
               onChatClick={onChatClick}
             />
           )}
-          <ChatContainer currentChat={currentChat} onChatClick={onChatClick} />
-          <NewMessageForm currentChat={currentChat} />
         </>
       )}
     </div>
