@@ -89,7 +89,14 @@ export default function ChatContainer({ currentChat, onChatClick }) {
       {data !== null &&
         data.messages.length > 0 &&
         data.messages.map((m) => {
-          return <ChatMessage key={m.id} {...m} onChatClick={onChatClick} />;
+          return (
+            <ChatMessage
+              key={m.id}
+              {...m}
+              chatType={currentChat.type}
+              onChatClick={onChatClick}
+            />
+          );
         })}
       {data !== null && typeof data.message !== "undefined" && (
         <FlashMessage type={"success"} message={data.message} />

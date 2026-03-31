@@ -97,7 +97,7 @@ button:disabled {
 button.flat {
   padding: 0.2em 1.2em;
 }
-button.danger {
+button.danger:not(:disabled) {
   background-color: var(--error-background-color);
 }
 button.round {
