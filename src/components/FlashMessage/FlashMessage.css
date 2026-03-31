@@ -12,7 +12,7 @@
   border-radius: 1rem;
   transition: transform 0.5s;
   transform: scaleY(1);
-  font-weight: 500;
+  font-weight: 600;
   transform-origin: top;
 }
 

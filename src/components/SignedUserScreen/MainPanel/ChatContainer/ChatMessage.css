@@ -18,6 +18,7 @@
   padding: 0;
   background-color: unset;
   color: var(--secondary-100);
+  font-weight: 600;
 }
 
 .chat-message.mine .message-user {
