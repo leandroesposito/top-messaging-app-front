@@ -9,6 +9,7 @@ import {
   logOut,
 } from "../../session/sessionManager";
 import "./Header.css";
+import { LogOut } from "lucide-react";
 
 export default function Header({ onSignUpClick, onLogInClick, onChatClick }) {
   const [loading, data, , makeRequest] = useFetch();
@@ -48,8 +49,9 @@ export default function Header({ onSignUpClick, onLogInClick, onChatClick }) {
                 className="log-out-button"
                 onClick={onLogOutClick}
                 disabled={loading}
+                aria-label="Log out"
               >
-                Log out
+                <LogOut />
               </button>
             </>
           ) : (

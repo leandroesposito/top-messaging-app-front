@@ -4,6 +4,7 @@ import ProfileDialog from "./ProfileDialog";
 import { getUserId } from "../../../../session/sessionManager";
 import MyProfileDialog from "./MyProfileDialog";
 import GroupDialog from "./GroupDialog/GroupDialog";
+import { X } from "lucide-react";
 
 export default function Dialog({
   currentChat,
@@ -18,8 +19,12 @@ export default function Dialog({
 
   return (
     <div className={`dialog-box ${collapsed ? "collapsed" : ""}`}>
-      <button onClick={onCloseDialogClick} className="close-dialog-button">
-        X
+      <button
+        onClick={onCloseDialogClick}
+        className="close-dialog-button round"
+        aria-label="Close dialog"
+      >
+        <X />
       </button>
       {currentChat.type === "profile" && currentChat.id === getUserId() && (
         <MyProfileDialog />

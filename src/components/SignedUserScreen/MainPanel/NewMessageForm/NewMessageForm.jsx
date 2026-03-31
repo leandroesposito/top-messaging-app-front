@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
 import "./NewMessageForm.css";
+import { SendHorizontal } from "lucide-react";
 
 export default function NewMessageForm({ currentChat }) {
   const [body, setBody] = useState("");
@@ -91,11 +92,12 @@ export default function NewMessageForm({ currentChat }) {
         <pre className="sizer">{body}</pre>
         <button
           type="submit"
-          className="flat"
+          className="round"
           onClick={onSubmitClick}
           disabled={loading || !canSendMessage}
+          aria-label="Send"
         >
-          Send
+          <SendHorizontal />
         </button>
       </form>
     </div>

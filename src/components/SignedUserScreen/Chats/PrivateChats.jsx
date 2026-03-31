@@ -4,6 +4,7 @@ import ChatItem from "./ChatItem";
 import FlashMessage from "../../FlashMessage/FlashMessage";
 import Loading from "../../Loading/Loading";
 import AddFriend from "./AddFriend/AddFriend";
+import { UserPlus, X } from "lucide-react";
 
 export default function PrivateChats({ onChatClick, currentChat }) {
   const [loading, data, errors, makeRequest] = useFetch();
@@ -73,8 +74,12 @@ export default function PrivateChats({ onChatClick, currentChat }) {
       <div className="chats-list-header">
         <h2>Friends</h2>
         <div className="buttons">
-          <button onClick={onAddFriendClick} className="flat">
-            {showAddFriend && "Close "} Add friend
+          <button
+            onClick={onAddFriendClick}
+            className="round"
+            aria-label={showAddFriend ? "Close add friend form" : "Add friend"}
+          >
+            {showAddFriend ? <X /> : <UserPlus />}
           </button>
         </div>
       </div>

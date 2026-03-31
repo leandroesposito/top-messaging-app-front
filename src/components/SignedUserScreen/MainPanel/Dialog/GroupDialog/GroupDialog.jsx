@@ -6,6 +6,7 @@ import MembersList from "./MembersList";
 import "./GroupDialog.css";
 import { getUserId } from "../../../../../session/sessionManager";
 import GroupForm from "./GroupForm";
+import { Clipboard, ClipboardCheck } from "lucide-react";
 
 export default function GroupDialog({ id, onChatClick, onCloseDialog }) {
   const [loading, data, errors, makeRequest] = useFetch();
@@ -89,8 +90,12 @@ export default function GroupDialog({ id, onChatClick, onCloseDialog }) {
 
             <div className="invite-container">
               <span>Invite code:</span> {data.group.inviteCode}{" "}
-              <button className="flat" onClick={onCopyClick}>
-                Copy
+              <button
+                className="round"
+                onClick={onCopyClick}
+                aria-label="Copy invite code"
+              >
+                {showCopied ? <ClipboardCheck /> : <Clipboard />}
               </button>
             </div>
             {showCopied && <FlashMessage message={"Copied"} type={"success"} />}

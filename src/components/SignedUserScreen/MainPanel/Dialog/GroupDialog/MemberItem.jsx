@@ -1,3 +1,4 @@
+import { Ban } from "lucide-react";
 import useFetch from "../../../../../hooks/useFetch";
 import { getUserId } from "../../../../../session/sessionManager";
 import FlashMessage from "../../../../FlashMessage/FlashMessage";
@@ -35,8 +36,12 @@ export default function MemberItem({
           </div>
           {!loading && isOwner && id !== getUserId() && (
             <div className="actions">
-              <button className="danger" onClick={onBanClick}>
-                Ban
+              <button
+                className="danger round"
+                onClick={onBanClick}
+                aria-label="Ban"
+              >
+                <Ban />
               </button>
             </div>
           )}

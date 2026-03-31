@@ -5,6 +5,7 @@ import FlashMessage from "../../FlashMessage/FlashMessage";
 import Loading from "../../Loading/Loading";
 import JoinGroupForm from "./JoinGroup/JoinGroupForm";
 import GroupForm from "../MainPanel/Dialog/GroupDialog/GroupForm";
+import { Plus, UserKey, X } from "lucide-react";
 
 export default function GroupChats({ onChatClick, currentChat }) {
   const [loading, data, errors, makeRequest] = useFetch();
@@ -83,11 +84,19 @@ export default function GroupChats({ onChatClick, currentChat }) {
       <div className="chats-list-header">
         <h2>Groups</h2>
         <div className="buttons">
-          <button onClick={onCreateGroupClick} className="flat">
-            {showCreateGroup && "Close "} Create group
+          <button
+            onClick={onCreateGroupClick}
+            className="round"
+            aria-label={showCreateGroup ? "Close create group" : "Create group"}
+          >
+            {showCreateGroup ? <X /> : <Plus />}
           </button>
-          <button onClick={onJoinGroupClick} className="flat">
-            {showJoinGroup && "Close "} Join group
+          <button
+            onClick={onJoinGroupClick}
+            className="round"
+            aria-label={showJoinGroup ? "Close join group" : "Join group"}
+          >
+            {showJoinGroup ? <X /> : <UserKey />}
           </button>
         </div>
       </div>

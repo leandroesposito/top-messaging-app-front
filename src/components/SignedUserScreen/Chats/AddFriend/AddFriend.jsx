@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getFriendCode } from "../../../../session/sessionManager";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
 import AddFriendForm from "./AddFriendForm";
+import { Clipboard, ClipboardCheck } from "lucide-react";
 
 export default function AddFriend({ display, onCloseAddFriend }) {
   const [showCopied, setShowCopied] = useState(false);
@@ -32,8 +33,12 @@ export default function AddFriend({ display, onCloseAddFriend }) {
     <div className="add-friend-container">
       <p>
         Your friend code is: {getFriendCode()}
-        <button className="flat" onClick={onCopyClick}>
-          Copy
+        <button
+          className="round"
+          onClick={onCopyClick}
+          aria-label="Copy friend code"
+        >
+          {showCopied ? <ClipboardCheck /> : <Clipboard />}
         </button>
       </p>
       {showCopied && <FlashMessage message={"Copied"} type={"success"} />}
