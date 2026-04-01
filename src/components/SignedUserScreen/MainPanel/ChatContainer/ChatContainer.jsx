@@ -84,7 +84,11 @@ export default function ChatContainer({ currentChat, onChatClick }) {
   }, [data]);
 
   return (
-    <div className="messages-container">
+    <div
+      className="messages-container"
+      aria-live="polite"
+      aria-relevant="additions"
+    >
       {loading && data === null && <Loading size={4} />}
       {data !== null &&
         data.messages.length > 0 &&

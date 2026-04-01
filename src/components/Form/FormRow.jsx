@@ -4,7 +4,7 @@ export default function FormRow({ children }) {
   return (
     <div className="form-row">
       <div className="form-row-content">{children}</div>
-      <div className="validation-result"></div>
+      <div className="validation-result" role="status"></div>
     </div>
   );
 }

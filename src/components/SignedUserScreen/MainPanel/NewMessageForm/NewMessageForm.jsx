@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import FlashMessage from "../../../FlashMessage/FlashMessage";
 import "./NewMessageForm.css";
@@ -8,6 +8,7 @@ export default function NewMessageForm({ currentChat }) {
   const [body, setBody] = useState("");
   const [loading, data, errors, makeRequest, reset] = useFetch();
   const [canSendMessage, setCanSendMessage] = useState(true);
+  const messageInputRef = useRef();
 
   function onBodyChange(event) {
     const bodyElem = event.target;
@@ -64,6 +65,7 @@ export default function NewMessageForm({ currentChat }) {
   useEffect(() => {
     setTimeout(() => {
       setCanSendMessage(true);
+      messageInputRef.current.focus();
     });
     reset();
   }, [currentChat, reset]);
@@ -88,6 +90,7 @@ export default function NewMessageForm({ currentChat }) {
           required
           value={body}
           disabled={!canSendMessage}
+          ref={messageInputRef}
         ></textarea>
         <pre className="sizer">{body}</pre>
         <button

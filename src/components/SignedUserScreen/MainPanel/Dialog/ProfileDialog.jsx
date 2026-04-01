@@ -37,7 +37,7 @@ export default function ProfileDialog({ id, onCloseDialog }) {
       {loading && <Loading />}
       {data !== null && typeof data.publicName !== "undefined" && (
         <>
-          <h2>{data.publicName}</h2>
+          <h2 id="dialog-title">{data.publicName}</h2>
           <p>{data.description}</p>
           <div className="buttons">
             {data.userId !== getUserId() && (

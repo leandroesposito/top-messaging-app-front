@@ -30,7 +30,10 @@ export default function FlashMessage({ type, message }) {
   }
 
   return (
-    <div className={`flash-message ${type} ${collapsed ? "collapsed" : ""}`}>
+    <div
+      className={`flash-message ${type} ${collapsed ? "collapsed" : ""}`}
+      role="status"
+    >
       <div className="message">{message}</div>{" "}
       <button
         aria-label="close"

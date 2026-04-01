@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import { setValidationResult } from "../../../Form/FormValidation";
 import FormRow from "../../../Form/FormRow";
@@ -8,6 +8,7 @@ import Loading from "../../../Loading/Loading";
 export default function AddFriendForm({ onCloseAddFriend }) {
   const [friendCode, setFriendCode] = useState("");
   const [loading, data, errors, makeRequest] = useFetch();
+  const inputRef = useRef();
 
   function onFriendCodeChange(event) {
     const friendCodeElem = event.target;
@@ -56,6 +57,12 @@ export default function AddFriendForm({ onCloseAddFriend }) {
     }
   }, [data, onCloseAddFriend]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      inputRef.current.focus();
+    });
+  }, []);
+
   return (
     <div className="add-fiend-form">
       <form onSubmit={onSubmit} className="chats-panel-form form">
@@ -69,6 +76,7 @@ export default function AddFriendForm({ onCloseAddFriend }) {
             value={friendCode}
             onChange={onFriendCodeChange}
             onBlur={validateFriendCode}
+            ref={inputRef}
             required
           />
         </FormRow>

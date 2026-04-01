@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import { setValidationResult } from "../../../Form/FormValidation";
 import FormRow from "../../../Form/FormRow";
@@ -8,6 +8,7 @@ import Loading from "../../../Loading/Loading";
 export default function JoinGroupForm({ onCloseJoinGroup }) {
   const [inviteCode, setInviteCode] = useState("");
   const [loading, data, errors, makeRequest] = useFetch();
+  const inputRef = useRef();
 
   function onInviteCodeChange(event) {
     const inviteCodeElem = event.target;
@@ -56,6 +57,12 @@ export default function JoinGroupForm({ onCloseJoinGroup }) {
     }
   }, [data, onCloseJoinGroup]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      inputRef.current.focus();
+    });
+  }, []);
+
   return (
     <div className="join-group-form">
       <form onSubmit={onSubmit} className="chats-panel-form form">
@@ -69,6 +76,7 @@ export default function JoinGroupForm({ onCloseJoinGroup }) {
             value={inviteCode}
             onChange={onInviteCodeChange}
             onBlur={validateInviteCode}
+            ref={inputRef}
             required
           />
         </FormRow>

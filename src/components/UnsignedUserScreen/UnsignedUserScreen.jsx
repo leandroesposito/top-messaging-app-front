@@ -19,7 +19,7 @@ export default function UnsignedUser() {
   }
 
   return (
-    <div className="form-screen">
+    <div className="form-screen" aria-live="polite">
       <Header onLogInClick={onLogInClick} onSignUpClick={onSignUpClick} />
       {viewLogIn ? (
         <LogInForm />

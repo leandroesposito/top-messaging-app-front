@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useFetch from "../../../../../hooks/useFetch";
 import { setValidationResult } from "../../../../Form/FormValidation";
 import FormRow from "../../../../Form/FormRow";
@@ -14,6 +14,7 @@ export default function GroupForm({
   const [loading, data, errors, makeRequest] = useFetch();
   const [name, setName] = useState(currentName || "");
   const [description, setDescription] = useState(currentDescription || "");
+  const inputRef = useRef();
 
   function onNameChange(event) {
     const nameElem = event.target;
@@ -74,13 +75,19 @@ export default function GroupForm({
     }
   }, [data, onCloseCreateGroup]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      inputRef.current.focus();
+    });
+  }, []);
+
   const isCreate =
     currentName === null && currentDescription === null && id === null;
 
   return (
     <div className="form-container">
       <form onSubmit={onSubmit} className="group-form form">
-        <h2>Group</h2>
+        <h2 id="dialog-title">Edit Group</h2>
         <FormRow>
           <label htmlFor="name">Name</label>
           <input
@@ -92,6 +99,7 @@ export default function GroupForm({
             onBlur={validateName}
             minLength={4}
             maxLength={50}
+            ref={inputRef}
             required
           />
         </FormRow>

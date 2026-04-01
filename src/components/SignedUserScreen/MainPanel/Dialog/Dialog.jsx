@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Dialog.css";
 import ProfileDialog from "./ProfileDialog";
 import { getUserId } from "../../../../session/sessionManager";
@@ -12,17 +12,26 @@ export default function Dialog({
   onChatClick,
 }) {
   const [collapsed, setCollapsed] = useState(true);
+  const closeButtonRef = useRef();
 
   useEffect(() => {
-    setTimeout(() => setCollapsed(false), 10);
+    setTimeout(() => {
+      setCollapsed(false);
+      closeButtonRef.current.focus();
+    }, 10);
   }, []);
 
   return (
-    <div className={`dialog-box ${collapsed ? "collapsed" : ""}`}>
+    <div
+      className={`dialog-box ${collapsed ? "collapsed" : ""}`}
+      role="dialog"
+      aria-labelledby="dialog-title"
+    >
       <button
         onClick={onCloseDialogClick}
         className="close-dialog-button round"
         aria-label="Close dialog"
+        ref={closeButtonRef}
       >
         <X />
       </button>

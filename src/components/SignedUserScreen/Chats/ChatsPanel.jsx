@@ -11,7 +11,11 @@ export default function ChatsPanel({ onChatClick, currentChat }) {
   }
 
   return (
-    <div className={`chats-panel ${hidden ? "hidden" : ""}`}>
+    <div
+      className={`chats-panel ${hidden ? "hidden" : ""}`}
+      aria-live="polite"
+      aria-relevant="additions"
+    >
       <PrivateChats onChatClick={onChatClick} currentChat={currentChat} />
       <GroupChats onChatClick={onChatClick} currentChat={currentChat} />
       <button

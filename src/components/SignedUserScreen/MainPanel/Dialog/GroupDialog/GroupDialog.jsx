@@ -83,7 +83,7 @@ export default function GroupDialog({ id, onChatClick, onCloseDialog }) {
               />
             ) : (
               <>
-                <h2>{data.group.name}</h2>
+                <h2 id="dialog-title">{data.group.name}</h2>
                 <p>{data.group.description}</p>
               </>
             )}

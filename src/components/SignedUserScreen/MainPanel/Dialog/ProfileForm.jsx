@@ -101,7 +101,7 @@ export default function ProfileForm() {
   return (
     <div className="form-container">
       <form onSubmit={onSubmit} className="profile-form form">
-        <h2>Profile</h2>
+        <h2 id="dialog-title">My Profile</h2>
         <FormRow>
           <label htmlFor="public-name">Public name</label>
           <input
