@@ -87,7 +87,7 @@ export default function GroupForm({
   return (
     <div className="form-container">
       <form onSubmit={onSubmit} className="group-form form">
-        <h2 id="dialog-title">Edit Group</h2>
+        <h2 id="dialog-title">{isCreate ? "Create" : "Edit"} Group</h2>
         <FormRow>
           <label htmlFor="name">Name</label>
           <input
