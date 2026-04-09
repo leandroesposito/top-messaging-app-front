@@ -4,6 +4,7 @@
   color: black;
   border-radius: 1rem;
   width: min(100%, 25rem);
+  min-width: 10rem;
   padding: 0.5rem;
   color: white;
   display: flex;
@@ -12,7 +13,7 @@
 }
 
 .chat-message.mine {
-  align-self: end;
+  margin-left: auto;
 }
 
 .chat-message .message-user {
