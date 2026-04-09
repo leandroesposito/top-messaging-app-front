@@ -6,6 +6,7 @@ import useFetch from "../../hooks/useFetch";
 import FlashMessage from "../FlashMessage/FlashMessage";
 import Loading from "../Loading/Loading";
 import "./SignUpForm.css";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function SignUpForm({ onSignUpSuccess }) {
   const [username, setUsername] = useState("");
@@ -184,7 +185,7 @@ export default function SignUpForm({ onSignUpSuccess }) {
             type="button"
             onClick={onPasswordVisibilityClick}
           >
-            {viewPassword ? "Hide" : "View"}
+            {viewPassword ? <EyeOff /> : <Eye />}
           </button>
         </FormRow>
         <FormRow>
