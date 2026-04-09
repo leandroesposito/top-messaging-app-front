@@ -17,8 +17,8 @@
 
 .dialog-box .close-dialog-button {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: -1rem;
+  right: -1rem;
   padding: 0.2rem 0.5rem;
   border-radius: 50%;
   background-color: unset;
@@ -33,4 +33,5 @@
 .dialog-content {
   display: grid;
   gap: 1rem;
+  position: relative;
 }

@@ -27,27 +27,32 @@ export default function Dialog({
       role="dialog"
       aria-labelledby="dialog-title"
     >
-      <button
-        onClick={onCloseDialogClick}
-        className="close-dialog-button round"
-        aria-label="Close dialog"
-        ref={closeButtonRef}
-      >
-        <X />
-      </button>
-      {currentChat.type === "profile" && currentChat.id === getUserId() && (
-        <MyProfileDialog />
-      )}
-      {currentChat.type === "profile" && currentChat.id !== getUserId() && (
-        <ProfileDialog id={currentChat.id} onCloseDialog={onCloseDialogClick} />
-      )}
-      {currentChat.type === "group" && (
-        <GroupDialog
-          id={currentChat.id}
-          onChatClick={onChatClick}
-          onCloseDialog={onCloseDialogClick}
-        />
-      )}
+      <div className="dialog-content">
+        <button
+          onClick={onCloseDialogClick}
+          className="close-dialog-button round"
+          aria-label="Close dialog"
+          ref={closeButtonRef}
+        >
+          <X />
+        </button>
+        {currentChat.type === "profile" && currentChat.id === getUserId() && (
+          <MyProfileDialog />
+        )}
+        {currentChat.type === "profile" && currentChat.id !== getUserId() && (
+          <ProfileDialog
+            id={currentChat.id}
+            onCloseDialog={onCloseDialogClick}
+          />
+        )}
+        {currentChat.type === "group" && (
+          <GroupDialog
+            id={currentChat.id}
+            onChatClick={onChatClick}
+            onCloseDialog={onCloseDialogClick}
+          />
+        )}
+      </div>
     </div>
   );
 }

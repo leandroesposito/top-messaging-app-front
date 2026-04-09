@@ -70,7 +70,7 @@ export default function GroupDialog({ id, onChatClick, onCloseDialog }) {
     data.group.ownerId === getUserId();
 
   return (
-    <div className="dialog-content">
+    <>
       {loading && <Loading />}
       {data !== null && typeof data.group !== "undefined" && (
         <>
@@ -125,6 +125,6 @@ export default function GroupDialog({ id, onChatClick, onCloseDialog }) {
       {errors.map((error, index) => {
         return <FlashMessage message={error} type={"error"} key={index} />;
       })}
-    </div>
+    </>
   );
 }

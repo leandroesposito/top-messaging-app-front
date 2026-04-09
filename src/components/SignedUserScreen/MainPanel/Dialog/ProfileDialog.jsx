@@ -33,7 +33,7 @@ export default function ProfileDialog({ id, onCloseDialog }) {
   }, [data, errors, onCloseDialog]);
 
   return (
-    <div className="dialog-content">
+    <>
       {loading && <Loading />}
       {data !== null && typeof data.publicName !== "undefined" && (
         <>
@@ -55,6 +55,6 @@ export default function ProfileDialog({ id, onCloseDialog }) {
       {errors.map((error, index) => {
         return <FlashMessage message={error} type={"error"} key={index} />;
       })}
-    </div>
+    </>
   );
 }
