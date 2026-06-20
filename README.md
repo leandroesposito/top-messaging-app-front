@@ -1,6 +1,23 @@
-# Chat Application Frontend
+# Messaging App Client - Complete Frontend Implementation
 
 A modern, single-page chat application featuring smart polling, automatic token refresh, and permission-based messaging. Built with React and Vite for a responsive, real-time chat experience without WebSockets.
+
+## Objectives
+
+This project demonstrates mastery of frontend development concepts and serves as a showcase of my full-stack learning journey:
+
+- **React Components** - Functional components, react hooks , component composition, and conditional rendering patterns
+- **Custom Hooks** - `useFetch` for API communication with automatic token refresh, loading states, and error handling
+- **State Management** - Component-level state with prop drilling, controlled components, and form validation
+- **Form Validation** - Real-time validation using HTML5 Constraint Validation API with custom error messages
+- **API Integration** - RESTful API consumption with Fetch API, authentication headers, and CORS configuration
+- **Token Authentication** - JWT access/refresh token flow with automatic refresh and race condition prevention
+- **Smart Polling** - Dynamic polling intervals (2.5s/5s/30s) based on user activity for real-time feel without WebSockets
+- **Session Management** - Token storage with login, logout, and token refresh helpers
+- **Responsive Design** - CSS Grid and Flexbox layouts that adapt across all devices
+- **Accessibility** - Semantic HTML, ARIA attributes (`aria-live`, `role="dialog"`), keyboard navigation, and focus management
+- **Error Handling** - User-friendly flash messages, validation feedback, and network error recovery
+- **UI/UX Patterns** - Collapsible panels, modal dialogs, auto-dismissing notifications, and real-time indicators
 
 ## Related Links
 
@@ -30,8 +47,6 @@ A modern, single-page chat application featuring smart polling, automatic token 
 - **Validation**: HTML5 Constraint Validation API
 
 ## Project Structure
-
-seguir aca
 
 ```
 src/
@@ -99,14 +114,13 @@ useEffect(() => {
     }
   };
 
-  // Listen to visibility and focus changes
   document.addEventListener("visibilitychange", updateInterval);
   window.addEventListener("focus", updateInterval);
   window.addEventListener("blur", updateInterval);
 }, [currentChat]);
 ```
 
-This approach balances real-time communication with resource efficiency, making it perfect for demonstration.
+This approach balances real-time communication with resource efficiency, making it perfect for demonstration purposes.
 
 ## Token Refresh System
 
@@ -151,6 +165,10 @@ function refreshTokens() {
 }
 ```
 
+### Why This Matters
+
+This architecture prevents race conditions where multiple expired requests trigger simultaneous refresh attempts. The cooldown mechanism ensures only one refresh request is made, and all other requests wait for its completion.
+
 ## UI/UX Highlights
 
 ### Responsive Layout
@@ -183,7 +201,7 @@ Component-scoped notifications with:
 - Smooth collapse animation
 - Type-based styling (success, error, info)
 - Accessible ARIA labels
-- Context based location
+- Context-based location
 
 ```javascript
 // Usage in any component
@@ -245,7 +263,7 @@ setValidationResult(inputElement, "Username is required");
 | Resource usage | Adjustable intervals         | Constant connection            |
 | Use case       | Perfect for demos/portfolios | Production real-time apps      |
 
-**Our choice**: Polling provides a simpler implementation perfect for demonstration while still delivering a great user experience.
+**My choice**: Polling provides a simpler implementation perfect for demonstration while still delivering a great user experience.
 
 ### Why No Routing Library?
 
@@ -260,6 +278,38 @@ setValidationResult(inputElement, "Username is required");
 - **Simplicity**: Works seamlessly with fetch API
 - **Flexibility**: Easy to inspect and debug
 - **Demonstration**: Show understanding of token-based auth
+
+## Authentication Flow
+
+### Login Flow
+
+```
+1. User submits login form
+2. API returns accessToken + refreshToken
+3. Tokens stored in localStorage
+4. User redirected to main chat interface
+```
+
+### Token Refresh Flow
+
+```
+1. API request returns 401 (Access token expired)
+2. useFetch hook detects expired token
+3. refreshTokens() called with cooldown protection
+4. New tokens obtained and stored
+5. Original request retried automatically
+6. User continues seamlessly (no interruption)
+```
+
+### Logout Flow
+
+```
+1. User clicks logout
+2. API request to /auth/log-out with refreshToken
+3. Server invalidates refresh token
+4. localStorage cleared
+5. User redirected to login screen
+```
 
 ## State Management Approach
 
@@ -305,34 +355,34 @@ The app uses component-level state with custom hooks:
 - **Conditional rendering**: Unmount hidden components
 - **Efficient re-renders**: useEffect dependency management
 
+## Screenshots
+
+### Sign Up Screen
+
+![Sign up screen](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/01_1.png)
+
+#### Form Validation
+
+![Form validation](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/01_2.png)
+
+### App View with Group Chat Open
+
+![App view with group chat open](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/04_1.png)
+
+### Group Owner Management Dialog
+
+![Group owner management dialog](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/06.png)
+
+### Add Friend Panel
+
+![Add friend panel](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/08_1.png)
+
+### Not Friend After First Message View
+
+![Not friend after first message view](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/10.png)
+
 ## Acknowledgments
 
 - Icons by [Lucide](https://lucide.dev/)
 - Built with [React](https://reactjs.org/) and [Vite](https://vitejs.dev/)
 - Backend API documentation provides the foundation for all data operations
-
-## Screenshots
-
-### Sign up screen
-
-![Sign up screen](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/01_1.png)
-
-#### Form validation
-
-![Form validation](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/01_2.png)
-
-### App view with group chat open
-
-![App view with group chat open](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/04_1.png)
-
-### Group owner management dialog
-
-![Group owner management dialog](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/06.png)
-
-### Add friend panel
-
-![Add friend panel](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/08_1.png)
-
-### Not friend after first message view
-
-![Not friend after first message view](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/10.png)
