@@ -23,6 +23,33 @@ This project demonstrates mastery of frontend development concepts and serves as
 
 - **Backend API Repository**: [https://github.com/leandroesposito/top-messaging-app-server](https://github.com/leandroesposito/top-messaging-app-server)
 - **Live Demo**: [https://top-messaging-app-front.netlify.app/](https://top-messaging-app-front.netlify.app/)
+  \*The free servers may take a few seconds to respond on first request.
+
+## Screenshots
+
+### Sign Up Screen
+
+![Sign up screen](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/01_1.png)
+
+#### Form Validation
+
+![Form validation](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/01_2.png)
+
+### App View with Group Chat Open
+
+![App view with group chat open](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/04_1.png)
+
+### Group Owner Management Dialog
+
+![Group owner management dialog](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/06.png)
+
+### Add Friend Panel
+
+![Add friend panel](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/08_1.png)
+
+### Not Friend After First Message View
+
+![Not friend after first message view](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/10.png)
 
 ## Key Features
 
@@ -354,32 +381,6 @@ The app uses component-level state with custom hooks:
 - **Vite build**: Fast HMR and optimized production bundles
 - **Conditional rendering**: Unmount hidden components
 - **Efficient re-renders**: useEffect dependency management
-
-## Screenshots
-
-### Sign Up Screen
-
-![Sign up screen](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/01_1.png)
-
-#### Form Validation
-
-![Form validation](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/01_2.png)
-
-### App View with Group Chat Open
-
-![App view with group chat open](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/04_1.png)
-
-### Group Owner Management Dialog
-
-![Group owner management dialog](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/06.png)
-
-### Add Friend Panel
-
-![Add friend panel](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/08_1.png)
-
-### Not Friend After First Message View
-
-![Not friend after first message view](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/10.png)
 
 ## Acknowledgments
 
