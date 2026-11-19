@@ -29,27 +29,27 @@ This project demonstrates mastery of frontend development concepts and serves as
 
 ### Sign Up Screen
 
-![Sign up screen](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/01_1.png)
+![Sign up screen](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/01_1.jpg)
 
 #### Form Validation
 
-![Form validation](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/01_2.png)
+![Form validation](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/01_2.jpg)
 
 ### App View with Group Chat Open
 
-![App view with group chat open](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/04_1.png)
+![App view with group chat open](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/04_1.jpg)
 
 ### Group Owner Management Dialog
 
-![Group owner management dialog](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/06.png)
+![Group owner management dialog](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/06.jpg)
 
 ### Add Friend Panel
 
-![Add friend panel](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/08_1.png)
+![Add friend panel](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/08_1.jpg)
 
 ### Not Friend After First Message View
 
-![Not friend after first message view](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/10.png)
+![Not friend after first message view](https://github.com/leandroesposito/top-messaging-app-front/blob/main/screenshots/10.jpg)
 
 ## Key Features
 
